@@ -3,32 +3,38 @@
 
 function getRandomIntInclusive(min, max) {
   if (max <= min) {
-    return min;
+    // eslint-disable-next-line no-console
+    console.log('Задан неверный диапазон. Максимальное значение должно быть больше минимального.');
+    return;
   }
   else if (min < 0) {
-    while (min < 0) {
-      min++;
-    }
+    // eslint-disable-next-line no-console
+    console.log('Задан неверный диапазон. Диапазон может быть только положительный, включая ноль.');
+    return;
   }
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
 }
 
-getRandomIntInclusive(-2, 2);
+// eslint-disable-next-line no-console
+console.log(getRandomIntInclusive(2, 5));
 
 // Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно
 
 function getRandomInt(min, max, symbolsAfterDot) {
   if (max <= min) {
-    return min.toFixed(symbolsAfterDot);
+    // eslint-disable-next-line no-console
+    console.log('Задан неверный диапазон. Максимальное значение должно быть больше минимального.');
+    return;
   }
   else if (min < 0) {
-    while (min < 0) {
-      min++;
-    }
+    // eslint-disable-next-line no-console
+    console.log('Задан неверный диапазон. Диапазон может быть только положительный, включая ноль.');
+    return;
   }
   return (min + Math.random() * (max - min)).toFixed(symbolsAfterDot);
 }
 
-getRandomInt(2, 5, 3);
+// eslint-disable-next-line no-console
+console.log(getRandomInt(2, 5, 3));
