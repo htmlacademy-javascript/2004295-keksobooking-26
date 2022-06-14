@@ -25,20 +25,34 @@ function getRandomPositiveFloat(min, max, symbolsAfterDot) {
 // *Раздел 4.15. Задание: Создание массива из 10 сгенерированных JS-объектов
 
 const SIMILAR_OBJECTS_COUNT = 10;
-const TIME_TO_CHECK = ['12:00', '13:00', '14:00'];
-const TYPE_OF_RESIDENCE = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const TIME_TO_CHECK = [
+  '12:00',
+  '13:00',
+  '14:00',
+];
+const TYPE_OF_RESIDENCE = [
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+  'hotel',
+];
+const FEATURES = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
+];
 const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
 function getFormattedId(id) {
-  if (id !== 10) {
-    return `0${id}`;
-  }
-  return id;
+  return (id !== 10) ? `0${id}` : id;
 }
 
 // Генерация одного из фиксированных значений
@@ -94,4 +108,5 @@ const createNewObject = (index) => {
 
 const similarObjects = Array.from({length: SIMILAR_OBJECTS_COUNT}, (_, i) => createNewObject(i));
 
-similarObjects();
+// eslint-disable-next-line no-console
+console.log(similarObjects);
