@@ -1,5 +1,3 @@
-// Источник: MDN Web Docs
-
 // Случайное ЦЕЛОЕ положительные число из переданного диапазона включительно
 function getRandomPositiveInteger(min, max) {
   if (max <= min) {
@@ -24,30 +22,33 @@ function getRandomPositiveFloat(min, max, symbolsAfterDot) {
   return +((min + Math.random() * (max - min)).toFixed(symbolsAfterDot));
 }
 
-// *! Раздел 4.15.
-//Задание: Создание массива из 10 сгенерированных JS-объектов
+// *Раздел 4.15. Задание: Создание массива из 10 сгенерированных JS-объектов
 
-// генерация id для author.avatar
-function getAvatarId() {
-  const randomId = getRandomPositiveInteger(1, 10);
-  if (randomId.length < 2) {
-    return `0${randomId}`;
+const similarObjectsCount = 10;
+
+function getFormattedId(id) {
+  if (id !== 10) {
+    return `0${id}`;
   }
-  return randomId;
+  return id;
 }
 
-// генерация одного из значений массива для offer.checkin и offer.checkout
-const timeToCheckArray = ['12:00', '13:00', '14:00'];
+const timeToCheck = ['12:00', '13:00', '14:00'];
 
-// генерация одного из значений массива для offer.type
-const typeOfResidenceArray = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const typeOfResidence = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
-// сама функция
+// Генерация одного из фиксированных значений
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-// ?Списал но не разобрался - массив случайной длины из значений. Значения не должны повторяться. для offer.features
 const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
+const photos = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+];
+
+// Генерация массива случайной длины из значений (без повторов).
 function getRandomArray(array) {
   const maxLength = array.length;
   const randomLength = getRandomPositiveInteger(1, maxLength);
@@ -65,15 +66,7 @@ function getRandomArray(array) {
   return newArray;
 }
 
-// генерация массива случайной длины из значений для offer.photos
-const photos = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-];
-
-//todo Функция
-const createNewObject = () => {
+const createNewObject = (index) => {
   const location = {
     lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
     lng: getRandomPositiveFloat(139.70000, 139.80000, 5)
@@ -81,18 +74,18 @@ const createNewObject = () => {
 
   return {
     author : {
-      avatar: `img/avatars/user${getAvatarId()}.png`
+      avatar: `img/avatars/user${getFormattedId(index + 1)}.png`
     },
 
     offer : {
       title: 'заголовок_предложения',
       address: `${location.lat}, ${location.lng}`, //?
       price: getRandomPositiveInteger(0, 100000),
-      type: getRandomArrayElement(typeOfResidenceArray),
+      type: getRandomArrayElement(typeOfResidence),
       rooms: getRandomPositiveInteger(0, 10),
       guests: getRandomPositiveInteger(0, 10),
-      checkin: getRandomArrayElement(timeToCheckArray),
-      checkout: getRandomArrayElement(timeToCheckArray),
+      checkin: getRandomArrayElement(timeToCheck),
+      checkout: getRandomArrayElement(timeToCheck),
       features: getRandomArray(features),
       description: 'описание_помещения',
       photos: getRandomArray(photos)
@@ -103,7 +96,7 @@ const createNewObject = () => {
 };
 
 // Клонируем 10 объектов из нашей функции
-const similarObjects = Array.from({length: 10}, createNewObject);
+const similarObjects = Array.from({length: similarObjectsCount}, (_, i) => createNewObject(i));
 
 // eslint-disable-next-line no-console
 console.log(similarObjects);
