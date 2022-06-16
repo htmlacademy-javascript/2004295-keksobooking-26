@@ -29,10 +29,8 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const USER_ID_COUNT = 10;
-
 // Добавляет передний 0 для однозначного числа
-const getFormattedId = (id) => (id !== USER_ID_COUNT) ? `0${id}` : id;
+const getFormattedId = (id) => (String(id).length < 2) ? `0${id}` : id;
 
 // Создание итогового объекта
 const createNewObject = (index) => {
