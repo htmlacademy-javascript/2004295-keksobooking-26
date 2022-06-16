@@ -29,10 +29,10 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const SIMILAR_OBJECTS_COUNT = 10;
+const USER_ID_COUNT = 10;
 
 // Добавляет передний 0 для однозначного числа
-const getFormattedId = (id) => (id !== SIMILAR_OBJECTS_COUNT) ? `0${id}` : id;
+const getFormattedId = (id) => (id !== USER_ID_COUNT) ? `0${id}` : id;
 
 // Создание итогового объекта
 const createNewObject = (index) => {
@@ -63,6 +63,8 @@ const createNewObject = (index) => {
     location
   };
 };
+
+const SIMILAR_OBJECTS_COUNT = 10;
 
 const similarObjects = () => Array.from({length: SIMILAR_OBJECTS_COUNT}, (_, i) => createNewObject(i));
 
