@@ -3,7 +3,7 @@ const getRandomPositiveInteger = (min, max) => {
   if (max <= min) {
     throw new Error('Задан неверный диапазон. Максимальное значение должно быть больше минимального.');
   }
-  else if (min < 0) {
+  if (min < 0) {
     throw new Error('Задан неверный диапазон. Диапазон может быть только положительный, включая ноль.');
   }
   min = Math.ceil(min);
@@ -16,7 +16,7 @@ const getRandomPositiveFloat = (min, max, symbolsAfterDot) => {
   if (max <= min) {
     throw new Error('Задан неверный диапазон. Максимальное значение должно быть больше минимального.');
   }
-  else if (min < 0) {
+  if (min < 0) {
     throw new Error('Задан неверный диапазон. Диапазон может быть только положительный, включая ноль.');
   }
   return +((min + Math.random() * (max - min)).toFixed(symbolsAfterDot));
