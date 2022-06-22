@@ -37,7 +37,30 @@ for (let i = 0; i < 1; i++) {
   title.textContent = similarObjects[i].offer.title;
   address.textContent = similarObjects[i].offer.address;
   price.innerHTML = `${similarObjects[i].offer.price  }<span>₽/ночь</span>`;
-  type.textContent = 'kkkk'; //TODO
+
+  /*
+  const typeTranslate = () => {
+    const currentType = similarObjects[i].offer.type;
+    if (currentType === 'flat') {
+      type.textContent = 'Квартира';
+    }
+    if (currentType === 'bungalow') {
+      type.textContent = 'Бунгало';
+    }
+    if (currentType === 'house') {
+      type.textContent = 'Дом';
+    }
+    if (currentType === 'palace') {
+      type.textContent = 'Дворец';
+    }
+    if (currentType === 'hotel') {
+      type.textContent = 'Отель';
+    }
+    console.log(currentType);
+  };
+  */
+
+  type.textContent = //TODO
   guestRooms.textContent = `${similarObjects[i].offer.rooms} комнаты для ${similarObjects[i].offer.guests} гостей`;
   timeCheck.textContent = `Заезд после ${similarObjects[i].offer.checkin}, выезд до ${similarObjects[i].offer.checkout}`;
 
