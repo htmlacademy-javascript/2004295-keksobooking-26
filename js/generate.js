@@ -13,15 +13,16 @@ for (let i = 0; i < 1; i++) {
   const title = element.querySelector('.popup__title');
   const address = element.querySelector('.popup__text--address');
   const price = element.querySelector('.popup__text--price');
-  const type = element.querySelector('.popup__type');
   const guestRooms = element.querySelector('.popup__text--capacity');
   const timeCheck = element.querySelector('.popup__text--time');
+  const description = element.querySelector('.popup__description');
+  const photos = element.querySelector('.popup__photos'); //TODO
+  const img = element.querySelector('img');
 
   const randomFeaturesList = similarObjects[i].offer.features; // Рандомный массив
   const featuresContainer = element.querySelector('.popup__features'); // Список features ( UL )
   const featuresList = featuresContainer.querySelectorAll('.popup__feature'); // Коллекция features из шаблона в разметке
   const modifiers = randomFeaturesList.map((randomFeature) => `popup__feature--${randomFeature}`);
-
   featuresList.forEach((featuresListItem) => {
     const modifier = featuresListItem.classList[1]; // 1 - это индекс нужного класса в атрибуте class
 
@@ -30,37 +31,20 @@ for (let i = 0; i < 1; i++) {
     }
   });
 
-  const description = element.querySelector('.popup__description');
-  const photos = element.querySelector('.popup__photos'); //TODO
-  const img = element.querySelector('img');
+  const type = element.querySelector('.popup__type');
+  const typeEng = similarObjects[i].offer.type;
+  const typeTranslate = {
+    flat: 'Квартира',
+    bungalow: 'Бунгало',
+    house: 'Дом',
+    palace: 'Дворец',
+    hotel: 'Отель',
+  };
+  type.textContent = typeTranslate[typeEng];
 
   title.textContent = similarObjects[i].offer.title;
   address.textContent = similarObjects[i].offer.address;
   price.innerHTML = `${similarObjects[i].offer.price  }<span>₽/ночь</span>`;
-
-  /*
-  const typeTranslate = () => {
-    const currentType = similarObjects[i].offer.type;
-    if (currentType === 'flat') {
-      type.textContent = 'Квартира';
-    }
-    if (currentType === 'bungalow') {
-      type.textContent = 'Бунгало';
-    }
-    if (currentType === 'house') {
-      type.textContent = 'Дом';
-    }
-    if (currentType === 'palace') {
-      type.textContent = 'Дворец';
-    }
-    if (currentType === 'hotel') {
-      type.textContent = 'Отель';
-    }
-    console.log(currentType);
-  };
-  */
-
-  type.textContent = //TODO
   guestRooms.textContent = `${similarObjects[i].offer.rooms} комнаты для ${similarObjects[i].offer.guests} гостей`;
   timeCheck.textContent = `Заезд после ${similarObjects[i].offer.checkin}, выезд до ${similarObjects[i].offer.checkout}`;
 
