@@ -67,3 +67,4 @@ const SIMILAR_OBJECTS_COUNT = 10;
 const similarObjects = Array.from({length: SIMILAR_OBJECTS_COUNT}, (_, i) => createNewObject(i));
 
 export {similarObjects};
+export {TYPE_OF_RESIDENCE};
