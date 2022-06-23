@@ -1,10 +1,9 @@
 import {similarObjects} from './data.js';
 
-const displayThis = document.querySelector('#map-canvas');
+const displayArea = document.querySelector('#map-canvas');
 
 const templateFragment = document.querySelector('#card').content; // Находим фрагмент с содержимым темплейта
 const template = templateFragment.querySelector('.popup'); // В фрагменте находим нужный элемент
-
 const fragment = document.createDocumentFragment();
 
 for (let i = 0; i < 1; i++) {
@@ -18,18 +17,19 @@ for (let i = 0; i < 1; i++) {
   const description = element.querySelector('.popup__description');
   const img = element.querySelector('img');
 
+  // offer.features
   const randomFeaturesList = similarObjects[i].offer.features; // Рандомный массив
   const featuresContainer = element.querySelector('.popup__features'); // Список features ( UL )
   const featuresList = featuresContainer.querySelectorAll('.popup__feature'); // Коллекция features из шаблона в разметке
   const modifiers = randomFeaturesList.map((randomFeature) => `popup__feature--${randomFeature}`);
   featuresList.forEach((featuresListItem) => {
     const modifier = featuresListItem.classList[1]; // 1 - это индекс нужного класса в атрибуте class
-
     if (!modifiers.includes(modifier)) {
       featuresListItem.remove();
     }
   });
 
+  // offer.type
   const type = element.querySelector('.popup__type');
   const typeEng = similarObjects[i].offer.type;
   const typeTranslate = {
@@ -41,11 +41,11 @@ for (let i = 0; i < 1; i++) {
   };
   type.textContent = typeTranslate[typeEng];
 
+  // offer.photos
   const randomPhotosArray = similarObjects[i].offer.photos; // Рандомный массив с photo.src
   const photosContainer = element.querySelector('.popup__photos'); // Контейнер photo в разметке
   const photoElement = element.querySelector('.popup__photo'); // Элемент photo в контейнере
   photosContainer.innerHTML = '';
-
   randomPhotosArray.forEach((randomSource) => {
     const clonedPhotoElement = photoElement.cloneNode(true);
     photosContainer.insertAdjacentElement('beforeend', clonedPhotoElement);
@@ -63,4 +63,4 @@ for (let i = 0; i < 1; i++) {
   fragment.appendChild(element);
 }
 
-displayThis.appendChild(fragment);
+displayArea.appendChild(fragment);
