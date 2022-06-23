@@ -44,10 +44,10 @@ for (let i = 0; i < 1; i++) {
   const randomPhotosArray = similarObjects[i].offer.photos; // Рандомный массив с photo.src
   const photosContainer = element.querySelector('.popup__photos'); // Контейнер photo в разметке
   const photoElement = element.querySelector('.popup__photo'); // Элемент photo в контейнере
-  const clonedPhotoElement = photoElement.cloneNode(true);
   photosContainer.innerHTML = '';
 
   for (let e = 0; e < randomPhotosArray.length; e++) {
+    const clonedPhotoElement = photoElement.cloneNode(true);
     photosContainer.insertAdjacentElement('beforeend', clonedPhotoElement);
     clonedPhotoElement.src = randomPhotosArray[e];
   }
