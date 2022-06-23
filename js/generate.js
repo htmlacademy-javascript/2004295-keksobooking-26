@@ -46,11 +46,11 @@ for (let i = 0; i < 1; i++) {
   const photoElement = element.querySelector('.popup__photo'); // Элемент photo в контейнере
   photosContainer.innerHTML = '';
 
-  for (let e = 0; e < randomPhotosArray.length; e++) {
+  randomPhotosArray.forEach((randomSource) => {
     const clonedPhotoElement = photoElement.cloneNode(true);
     photosContainer.insertAdjacentElement('beforeend', clonedPhotoElement);
-    clonedPhotoElement.src = randomPhotosArray[e];
-  }
+    clonedPhotoElement.src = randomSource;
+  });
 
   title.textContent = similarObjects[i].offer.title;
   address.textContent = similarObjects[i].offer.address;
