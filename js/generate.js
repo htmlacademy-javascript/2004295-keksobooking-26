@@ -16,7 +16,6 @@ for (let i = 0; i < 1; i++) {
   const guestRooms = element.querySelector('.popup__text--capacity');
   const timeCheck = element.querySelector('.popup__text--time');
   const description = element.querySelector('.popup__description');
-  const photos = element.querySelector('.popup__photos'); //TODO
   const img = element.querySelector('img');
 
   const randomFeaturesList = similarObjects[i].offer.features; // Рандомный массив
@@ -42,15 +41,22 @@ for (let i = 0; i < 1; i++) {
   };
   type.textContent = typeTranslate[typeEng];
 
+  const randomPhotosArray = similarObjects[i].offer.photos; // Рандомный массив с photo.src
+  const photosContainer = element.querySelector('.popup__photos'); // Контейнер photo в разметке
+  const photoElement = element.querySelector('.popup__photo'); // Элемент photo в контейнере
+
+  for (let a = 0; a < randomPhotosArray.length; a++) {
+    photosContainer.insertAdjacentHTML('beforeend', photoElement);
+    photoElement.src = randomPhotosArray[a];
+  }
+
   title.textContent = similarObjects[i].offer.title;
   address.textContent = similarObjects[i].offer.address;
   price.innerHTML = `${similarObjects[i].offer.price  }<span>₽/ночь</span>`;
   guestRooms.textContent = `${similarObjects[i].offer.rooms} комнаты для ${similarObjects[i].offer.guests} гостей`;
   timeCheck.textContent = `Заезд после ${similarObjects[i].offer.checkin}, выезд до ${similarObjects[i].offer.checkout}`;
-
   description.textContent = similarObjects[i].offer.description;
   img.src = similarObjects[i].author.avatar;
-  photos.src = //TODO
 
   fragment.appendChild(element);
 }
