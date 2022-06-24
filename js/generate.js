@@ -15,23 +15,27 @@ for (let i = 0; i < 1; i++) {
   const guestRooms = element.querySelector('.popup__text--capacity');
   const timeCheck = element.querySelector('.popup__text--time');
   const description = element.querySelector('.popup__description');
-  const img = element.querySelector('img');
+  const avatar = element.querySelector('img');
 
   // offer.features
   const randomFeaturesList = similarObjects[i].offer.features; // Рандомный массив
   const featuresContainer = element.querySelector('.popup__features'); // Список features ( UL )
   const featuresList = featuresContainer.querySelectorAll('.popup__feature'); // Коллекция features из шаблона в разметке
-  const modifiers = randomFeaturesList.map((randomFeature) => `popup__feature--${randomFeature}`);
-  featuresList.forEach((featuresListItem) => {
-    const modifier = featuresListItem.classList[1]; // 1 - это индекс нужного класса в атрибуте class
-    if (!modifiers.includes(modifier)) {
-      featuresListItem.remove();
-    }
-  });
+  if (similarObjects[i].offer.features) {
+    const modifiers = randomFeaturesList.map((randomFeature) => `popup__feature--${randomFeature}`);
+    featuresList.forEach((featuresListItem) => {
+      const modifier = featuresListItem.classList[1]; // 1 - это индекс нужного класса в атрибуте class
+      if (!modifiers.includes(modifier)) {
+        featuresListItem.remove();
+      }
+    });
+  } else {
+    featuresContainer.innerHTML = '';
+  }
 
   // offer.type
   const type = element.querySelector('.popup__type');
-  const typeEng = similarObjects[i].offer.type;
+  const typeEng = similarObjects[i].offer.type || '';
   const typeTranslate = {
     flat: 'Квартира',
     bungalow: 'Бунгало',
@@ -45,20 +49,24 @@ for (let i = 0; i < 1; i++) {
   const randomPhotosArray = similarObjects[i].offer.photos; // Рандомный массив с photo.src
   const photosContainer = element.querySelector('.popup__photos'); // Контейнер photo в разметке
   const photoElement = element.querySelector('.popup__photo'); // Элемент photo в контейнере
-  photosContainer.innerHTML = '';
-  randomPhotosArray.forEach((randomSource) => {
-    const clonedPhotoElement = photoElement.cloneNode(true);
-    photosContainer.insertAdjacentElement('beforeend', clonedPhotoElement);
-    clonedPhotoElement.src = randomSource;
-  });
+  if (similarObjects[i].offer.photos) {
+    photosContainer.innerHTML = '';
+    randomPhotosArray.forEach((randomSource) => {
+      const clonedPhotoElement = photoElement.cloneNode(true);
+      photosContainer.insertAdjacentElement('beforeend', clonedPhotoElement);
+      clonedPhotoElement.src = randomSource;
+    });
+  } else {
+    photosContainer.innerHTML = '';
+  }
 
-  title.textContent = similarObjects[i].offer.title;
-  address.textContent = similarObjects[i].offer.address;
-  price.innerHTML = `${similarObjects[i].offer.price  }<span>₽/ночь</span>`;
-  guestRooms.textContent = `${similarObjects[i].offer.rooms} комнаты для ${similarObjects[i].offer.guests} гостей`;
-  timeCheck.textContent = `Заезд после ${similarObjects[i].offer.checkin}, выезд до ${similarObjects[i].offer.checkout}`;
-  description.textContent = similarObjects[i].offer.description;
-  img.src = similarObjects[i].author.avatar;
+  title.textContent = similarObjects[i].offer.title || '';
+  address.textContent = similarObjects[i].offer.address || '';
+  price.innerHTML = (similarObjects[i].offer.price) ? `${similarObjects[i].offer.price  }<span>₽/ночь</span>` :  price.innerHTML ='';
+  guestRooms.textContent = (similarObjects[i].offer.rooms && similarObjects[i].offer.guests) ? `${similarObjects[i].offer.rooms} комнаты для ${similarObjects[i].offer.guests} гостей` : guestRooms.textContent = '';
+  timeCheck.textContent = (similarObjects[i].offer.checkin && similarObjects[i].offer.checkout) ? `Заезд после ${similarObjects[i].offer.checkin}, выезд до ${similarObjects[i].offer.checkout}` : timeCheck.textContent = '';
+  description.textContent = similarObjects[i].offer.description || '';
+  avatar.src = (similarObjects[i].author.avatar) ? similarObjects[i].author.avatar : avatar.style.display = 'none';
 
   fragment.appendChild(element);
 }
