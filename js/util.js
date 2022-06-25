@@ -22,10 +22,10 @@ const getRandomPositiveFloat = (min, max, symbolsAfterDot) => {
   return +((min + Math.random() * (max - min)).toFixed(symbolsAfterDot));
 };
 
-// Генерация одного из фиксированных значений
+// Случайный элемент из массива
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-// Генерация массива случайной длины из значений (без повторов).
+// Массив случайной длины из значений (без повторов).
 const getRandomArray = (array) => {
   const maxLength = array.length;
   const randomLength = getRandomPositiveInteger(1, maxLength);

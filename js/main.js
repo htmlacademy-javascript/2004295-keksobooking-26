@@ -1,6 +1,3 @@
 import './data.js';
 import './util.js';
-import {similarObjects} from './data.js';
-
-// eslint-disable-next-line no-console
-console.log(similarObjects);
+import './generate.js';

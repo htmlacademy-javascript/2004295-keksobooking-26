@@ -46,7 +46,7 @@ const createNewObject = (index) => {
 
     offer : {
       title: 'заголовок_предложения',
-      address: `${location.lat}, ${location.lng}`, //?
+      address: `${location.lat}, ${location.lng}`,
       price: getRandomPositiveInteger(0, 100000),
       type: getRandomArrayElement(TYPE_OF_RESIDENCE),
       rooms: getRandomPositiveInteger(0, 10),
