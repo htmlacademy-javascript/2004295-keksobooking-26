@@ -14,11 +14,19 @@ const pristine = new Pristine(adForm, {
   errorTextClass: 'ad-form__error'
 });
 
+//* TITLE
 function validateTitle (value) {
   return value.length >= 30 && value.length <= 100;
 }
 
 pristine.addValidator(adForm.querySelector('#title'), validateTitle, 'От 30 до 100 символов');
+
+//* PRICE
+function validatePrice (value) {
+  return value <= 100000;
+}
+
+pristine.addValidator(adForm.querySelector('#price'), validatePrice, 'Максимум 100000');
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
