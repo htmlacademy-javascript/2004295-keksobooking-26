@@ -20,7 +20,6 @@ const validateRoom = () => {
 
 pristine.addValidator(roomFieldElement, validateRoom, 'Измените количество комнат/гостей');
 
-adForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+adForm.addEventListener('submit', () => {
   pristine.validate();
 });
