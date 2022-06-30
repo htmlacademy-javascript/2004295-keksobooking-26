@@ -15,7 +15,10 @@ const validateRoom = () => {
   const currentRoomValue = parseInt(roomFieldElement.value, 10); //Выбранное количество комнат
   const currentCapacityValue = parseInt(capacityFieldElement.value, 10); //Выбранное количество гостей
 
-  return currentCapacityValue === 0 || currentRoomValue === 100 ? currentCapacityValue === 0 && currentRoomValue === 100 : currentRoomValue >= currentCapacityValue;
+  if (currentCapacityValue === 0 || currentRoomValue === 100) {
+    return currentCapacityValue === 0 && currentRoomValue === 100;
+  }
+  return currentRoomValue >= currentCapacityValue;
 };
 
 pristine.addValidator(roomFieldElement, validateRoom, 'Измените количество комнат/гостей');
