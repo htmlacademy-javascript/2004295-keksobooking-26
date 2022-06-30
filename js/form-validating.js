@@ -7,19 +7,6 @@ const pristine = new Pristine(adForm, {
   errorTextClass: 'ad-form__element--error',
 });
 
-//* TITLE
-function validateTitle (value) {
-  return value.length >= 30 && value.length <= 100;
-}
-pristine.addValidator(adForm.querySelector('#title'), validateTitle, 'От 30 до 100 символов');
-
-//* PRICE
-const maxPrice = 100000;
-function validatePrice (value) {
-  return value <= maxPrice;
-}
-pristine.addValidator(adForm.querySelector('#price'), validatePrice, `Максимум ${maxPrice}`);
-
 //*GUESTROOMS
 const roomFieldElement = adForm.querySelector('#room_number'); // Количество комнат
 const capacityFieldElement = adForm.querySelector('#capacity'); //Количество гостей
@@ -35,7 +22,7 @@ const validateRoom = () => {
   return currentRoomValue >= currentCapacityValue;
 };
 
-pristine.addValidator(roomFieldElement, validateRoom, 'Ошибочка');
+pristine.addValidator(roomFieldElement, validateRoom, 'Измените количество комнат/гостей');
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
