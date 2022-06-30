@@ -5,7 +5,7 @@ const pristine = new Pristine(adForm, {
   errorTextParent: 'ad-form__element',
   errorTextTag: 'span',
   errorTextClass: 'ad-form__element--error',
-});
+}, false);
 
 //*GUESTROOMS
 const roomFieldElement = adForm.querySelector('#room_number'); // Количество комнат
