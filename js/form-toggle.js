@@ -24,5 +24,4 @@ const makeFormActive = () => {
   );
 };
 
-export {makeFormDisabled};
-export {makeFormActive};
+export {makeFormDisabled, makeFormActive};
