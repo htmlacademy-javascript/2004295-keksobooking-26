@@ -5,7 +5,39 @@ const pristine = new Pristine(adForm, {
   errorTextParent: 'ad-form__element',
   errorTextTag: 'span',
   errorTextClass: 'ad-form__element--error',
-}, false);
+}, true);
+
+//Валидация поля «Тип жилья» в зависимости от поля «Цена за ночь»:
+const typeFieldElement = adForm.querySelector('#type'); //Поле 'тип жилья'
+const priceFieldElement = adForm.querySelector('#price'); //Поле 'цена'
+const minPrice = {
+  'bungalow' : 0,
+  'flat' : 1000,
+  'hotel' : 3000,
+  'house' : 5000,
+  'palace' : 10000,
+};
+
+const validatePrice = () => {
+  const currentTypeValue = typeFieldElement.value; //Выбранный тип жилья
+  const currentPriceValue = minPrice[currentTypeValue]; //Берем значение из minPrice
+
+  return priceFieldElement.value >= currentPriceValue;
+};
+
+const validatePriceErrorMessage = () => `Введите цену больше ${minPrice[typeFieldElement.value]}`;
+
+pristine.addValidator(priceFieldElement, validatePrice, validatePriceErrorMessage);
+
+//!
+
+const onTypeChange = () => {
+  priceFieldElement.setAttribute('min', minPrice[typeFieldElement.value]); //Добавляем priceFieldElement атрибут min со значением minPrice
+  priceFieldElement.placeholder = minPrice[typeFieldElement.value]; //Меняем priceFieldElement плейсхолдер на значение minPrice
+  pristine.validate(priceFieldElement);
+};
+
+priceFieldElement.addEventListener('change', onTypeChange);
 
 //Валидация roomFieldElement
 const roomFieldElement = adForm.querySelector('#room_number'); // Количество комнат
@@ -23,6 +55,12 @@ const validateRoom = () => {
 
 pristine.addValidator(roomFieldElement, validateRoom, 'Измените количество комнат/гостей');
 
-adForm.addEventListener('submit', () => {
-  pristine.validate();
+adForm.addEventListener('submit', (evt) => {
+  if (!pristine.validate()) {
+    evt.preventDefault();
+  }
+});
+
+adForm.addEventListener('reset', () => {
+  pristine.reset();
 });
