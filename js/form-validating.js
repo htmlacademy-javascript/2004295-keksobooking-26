@@ -19,23 +19,35 @@ const minPrice = {
 };
 
 const validatePrice = () => {
-  const currentTypeValue = typeFieldElement.value; //Выбранный тип жилья
-  const currentPriceValue = minPrice[currentTypeValue]; //Берем значение из minPrice
+  const typeValue = typeFieldElement.value; //Выбранный тип жилья
+  const priceValue = minPrice[typeValue]; //Берем значение из minPrice
 
-  return priceFieldElement.value >= currentPriceValue;
+  return priceFieldElement.value >= priceValue;
 };
 
-const validatePriceErrorMessage = () => `Введите цену больше ${minPrice[typeFieldElement.value]}`;
+const getPriceErrorMessage = () => `Введите цену больше ${minPrice[typeFieldElement.value]}`;
 
-pristine.addValidator(priceFieldElement, validatePrice, validatePriceErrorMessage);
+pristine.addValidator(priceFieldElement, validatePrice, getPriceErrorMessage);
 
 const onTypeChange = () => {
-  priceFieldElement.setAttribute('min', minPrice[typeFieldElement.value]); //Добавляем priceFieldElement атрибут min со значением minPrice
-  priceFieldElement.placeholder = minPrice[typeFieldElement.value]; //Меняем priceFieldElement плейсхолдер на значение minPrice
+  priceFieldElement.setAttribute('min', minPrice[typeFieldElement.value]);
+  priceFieldElement.placeholder = minPrice[typeFieldElement.value];
   pristine.validate(priceFieldElement);
 };
 
 adForm.addEventListener('change', onTypeChange);
+
+//Валидация checkin и checkout (синхронизация)
+const timeinElement = adForm.querySelector('#timein');
+const timeoutElement = adForm.querySelector('#timeout');
+
+timeinElement.addEventListener('change', () => {
+  timeoutElement.value = timeinElement.value;
+});
+
+timeoutElement.addEventListener('change', () => {
+  timeinElement.value = timeoutElement.value;
+});
 
 //Валидация roomFieldElement
 const roomFieldElement = adForm.querySelector('#room_number'); // Количество комнат
