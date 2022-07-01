@@ -29,15 +29,13 @@ const validatePriceErrorMessage = () => `Введите цену больше ${
 
 pristine.addValidator(priceFieldElement, validatePrice, validatePriceErrorMessage);
 
-//!
-
 const onTypeChange = () => {
   priceFieldElement.setAttribute('min', minPrice[typeFieldElement.value]); //Добавляем priceFieldElement атрибут min со значением minPrice
   priceFieldElement.placeholder = minPrice[typeFieldElement.value]; //Меняем priceFieldElement плейсхолдер на значение minPrice
   pristine.validate(priceFieldElement);
 };
 
-priceFieldElement.addEventListener('change', onTypeChange);
+adForm.addEventListener('change', onTypeChange);
 
 //Валидация roomFieldElement
 const roomFieldElement = adForm.querySelector('#room_number'); // Количество комнат
