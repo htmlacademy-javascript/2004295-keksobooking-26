@@ -7,7 +7,7 @@ const pristine = new Pristine(adForm, {
   errorTextClass: 'ad-form__element--error',
 }, true);
 
-//Валидация поля «Тип жилья» в зависимости от поля «Цена за ночь»:
+//Валидация поля «Цена за ночь» в зависимости от поля «Тип жилья»:
 const typeFieldElement = adForm.querySelector('#type'); //Поле 'тип жилья'
 const priceFieldElement = adForm.querySelector('#price'); //Поле 'цена'
 const minPrice = {
@@ -29,10 +29,12 @@ const getPriceErrorMessage = () => `Введите цену больше ${minPr
 
 pristine.addValidator(priceFieldElement, validatePrice, getPriceErrorMessage);
 
-const onTypeChange = () => {
-  priceFieldElement.setAttribute('min', minPrice[typeFieldElement.value]);
-  priceFieldElement.placeholder = minPrice[typeFieldElement.value];
-  pristine.validate(priceFieldElement);
+const onTypeChange = (evt) => {
+  if (evt.target === typeFieldElement) {
+    priceFieldElement.setAttribute('min', minPrice[typeFieldElement.value]);
+    priceFieldElement.placeholder = minPrice[typeFieldElement.value];
+    pristine.validate(priceFieldElement);
+  }
 };
 
 adForm.addEventListener('change', onTypeChange);
