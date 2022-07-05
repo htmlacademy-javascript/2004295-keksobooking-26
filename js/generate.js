@@ -1,7 +1,5 @@
 import {similarObjects} from './data.js';
 
-const displayAreaElement = document.querySelector('#map-canvas');
-
 const templateFragment = document.querySelector('#card').content; // Темплейт
 const template = templateFragment.querySelector('.popup'); // Нужный элемент в фрагменте
 const fragment = document.createDocumentFragment();
@@ -66,5 +64,3 @@ descriptionElement.textContent = similarObjects[0].offer.description || '';
 avatarElement.src = similarObjects[0].author.avatar ? similarObjects[0].author.avatar : avatarElement.style.display = 'none';
 
 fragment.appendChild(element);
-
-displayAreaElement.appendChild(fragment);
