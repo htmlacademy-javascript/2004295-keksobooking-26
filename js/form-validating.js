@@ -35,11 +35,19 @@ const getPriceErrorMessage = () => `Введите цену больше ${minPr
 const validateRoom = () => {
   const currentRoomValue = parseInt(roomFieldElement.value, 10); //Выбранное количество комнат
   const currentCapacityValue = parseInt(capacityFieldElement.value, 10); //Выбранное количество гостей
-
   if (currentCapacityValue === 0 || currentRoomValue === 100) {
     return currentCapacityValue === 0 && currentRoomValue === 100;
   }
   return currentRoomValue >= currentCapacityValue;
+};
+
+const getRoomErrorMessage = () => {
+  if (parseInt(roomFieldElement.value, 10) === 1) {
+    return 'Не более 1 гостя';
+  } else if (parseInt(roomFieldElement.value, 10) === 100) {
+    return 'Не для гостей';
+  }
+  return `Не более ${roomFieldElement.value} гостей`;
 };
 
 //События при "change"
@@ -59,9 +67,9 @@ const onChange = (evt) => {
 };
 
 adForm.addEventListener('change', onChange);
+
 pristine.addValidator(priceFieldElement, validatePrice, getPriceErrorMessage);
-pristine.addValidator(roomFieldElement, validateRoom, 'Измените количество комнат/гостей');
-pristine.addValidator(capacityFieldElement, validateRoom, 'Измените количество комнат/гостей');
+pristine.addValidator(roomFieldElement, validateRoom, getRoomErrorMessage);
 
 adForm.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {
