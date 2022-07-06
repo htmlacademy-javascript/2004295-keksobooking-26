@@ -6,7 +6,7 @@ import {fragment} from './offer-generate.js';
 makeFormDisabled();
 
 const resetButton = document.querySelector('.ad-form__reset');
-const defaultLocation = {
+const DEFAULT_LOCATION = {
   lat: 35.7000,
   lng: 139.7000,
 };
@@ -16,7 +16,7 @@ const map = L.map('map-canvas')
     makeFormActive();
   })
   .setView(
-    defaultLocation
+    DEFAULT_LOCATION
     , 11);
 
 L.tileLayer(
@@ -34,7 +34,7 @@ const mainMarkerIcon = L.icon({
 });
 
 const mainMarker = L.marker(
-  defaultLocation,
+  DEFAULT_LOCATION,
   {
     draggable: true,
     icon: mainMarkerIcon,
@@ -56,12 +56,10 @@ const standartMarkericon = L.icon({
 });
 
 const createStandartMarker = ((item) => {
-  const lat = item.location.lat;
-  const lng = item.location.lng;
   const standartMarker = L.marker(
     {
-      lat,
-      lng,
+      lat: item.location.lat,
+      lng: item.location.lng,
     },
     {
       icon: standartMarkericon,
@@ -78,9 +76,9 @@ similarObjects.forEach((item) => {
 
 //*Reset
 resetButton.addEventListener('click', () => {
-  mainMarker.setLatLng(defaultLocation);
+  mainMarker.setLatLng(DEFAULT_LOCATION);
 
   map.setView(
-    defaultLocation
+    DEFAULT_LOCATION
     , 11);
 });
