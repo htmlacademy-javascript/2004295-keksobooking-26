@@ -46,12 +46,10 @@ mainMarker.on('moveend', (evt) => {
   addressElement.value = `${(evt.target.getLatLng().lat).toFixed(5)}, ${(evt.target.getLatLng().lng).toFixed(5)}`;
 });
 
-resetButton.addEventListener('click', () => {
-  mainMarker.setLatLng(defaultLocation);
-
-  map.setView(
-    defaultLocation
-    , 11);
+const standartMarkericon = L.icon({
+  iconUrl: './img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
 });
 
 const createStandartMarker = ((item) => {
@@ -61,6 +59,9 @@ const createStandartMarker = ((item) => {
     {
       lat,
       lng,
+    },
+    {
+      icon: standartMarkericon,
     },
   );
   standartMarker
@@ -72,3 +73,10 @@ similarObjects.forEach((item) => {
   createStandartMarker(item);
 });
 
+resetButton.addEventListener('click', () => {
+  mainMarker.setLatLng(defaultLocation);
+
+  map.setView(
+    defaultLocation
+    , 11);
+});
