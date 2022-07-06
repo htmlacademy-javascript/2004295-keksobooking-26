@@ -64,3 +64,5 @@ descriptionElement.textContent = similarObjects[0].offer.description || '';
 avatarElement.src = similarObjects[0].author.avatar ? similarObjects[0].author.avatar : avatarElement.style.display = 'none';
 
 fragment.appendChild(element);
+
+export {fragment};

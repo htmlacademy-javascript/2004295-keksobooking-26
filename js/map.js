@@ -1,6 +1,7 @@
 import {makeFormActive} from './form-toggle.js';
 import {makeFormDisabled} from './form-toggle.js';
 import {similarObjects} from './data.js';
+import {fragment} from './offer-generate.js';
 
 makeFormDisabled();
 
@@ -25,6 +26,7 @@ L.tileLayer(
   },
 ).addTo(map);
 
+//*main marker
 const mainMarkerIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
@@ -46,6 +48,7 @@ mainMarker.on('moveend', (evt) => {
   addressElement.value = `${(evt.target.getLatLng().lat).toFixed(5)}, ${(evt.target.getLatLng().lng).toFixed(5)}`;
 });
 
+//*standart marker
 const standartMarkericon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
@@ -65,14 +68,15 @@ const createStandartMarker = ((item) => {
     },
   );
   standartMarker
-    .addTo(map);
-  return standartMarker;
+    .addTo(map)
+    .bindPopup(fragment);
 });
 
 similarObjects.forEach((item) => {
   createStandartMarker(item);
 });
 
+//*Reset
 resetButton.addEventListener('click', () => {
   mainMarker.setLatLng(defaultLocation);
 
