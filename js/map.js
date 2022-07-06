@@ -1,18 +1,22 @@
 import {makeFormActive} from './form-toggle.js';
 import {makeFormDisabled} from './form-toggle.js';
+import {similarObjects} from './data.js';
 
 makeFormDisabled();
 
 const resetButton = document.querySelector('.ad-form__reset');
+const defaultLocation = {
+  lat: 35.7000,
+  lng: 139.7000,
+};
 
 const map = L.map('map-canvas')
   .on('load', () => {
     makeFormActive();
   })
-  .setView({
-    lat: 35.7000,
-    lng: 139.7000,
-  }, 11);
+  .setView(
+    defaultLocation
+    , 11);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -21,38 +25,50 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const mainPinIcon = L.icon({
+const mainMarkerIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
 
-const mainPinMarker = L.marker(
-  {
-    lat: 35.7000,
-    lng: 139.7000,
-  },
+const mainMarker = L.marker(
+  defaultLocation,
   {
     draggable: true,
-    icon: mainPinIcon,
+    icon: mainMarkerIcon,
   },
 );
 
-mainPinMarker.addTo(map);
+mainMarker.addTo(map);
 
-mainPinMarker.on('moveend', (evt) => {
+mainMarker.on('moveend', (evt) => {
   const addressElement = document.querySelector('#address');
   addressElement.value = `${(evt.target.getLatLng().lat).toFixed(5)}, ${(evt.target.getLatLng().lng).toFixed(5)}`;
 });
 
 resetButton.addEventListener('click', () => {
-  mainPinMarker.setLatLng({
-    lat: 35.7000,
-    lng: 139.7000,
-  });
+  mainMarker.setLatLng(defaultLocation);
 
-  map.setView({
-    lat: 35.7000,
-    lng: 139.7000,
-  }, 11);
+  map.setView(
+    defaultLocation
+    , 11);
 });
+
+const createStandartMarker = ((item) => {
+  const lat = item.location.lat;
+  const lng = item.location.lng;
+  const standartMarker = L.marker(
+    {
+      lat,
+      lng,
+    },
+  );
+  standartMarker
+    .addTo(map);
+  return standartMarker;
+});
+
+similarObjects.forEach((item) => {
+  createStandartMarker(item);
+});
+
