@@ -33,7 +33,7 @@ const PHOTOS = [
 const getFormattedId = (id) => (String(id).length < 2) ? `0${id}` : id;
 
 // Создание итогового объекта
-const createNewOffer = (index) => {
+const createOffer = (index) => {
   const location = {
     lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
     lng: getRandomPositiveFloat(139.70000, 139.80000, 5)
@@ -64,6 +64,6 @@ const createNewOffer = (index) => {
 
 const SIMILAR_OBJECTS_COUNT = 10;
 
-const similarObjects = Array.from({length: SIMILAR_OBJECTS_COUNT}, (_, i) => createNewOffer(i));
+const similarOffers = Array.from({length: SIMILAR_OBJECTS_COUNT}, (_, i) => createOffer(i));
 
-export {similarObjects};
+export {similarOffers};
