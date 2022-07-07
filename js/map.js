@@ -74,19 +74,7 @@ const createStandartMarker = ((item) => {
 
 similarObjects.forEach((object) => createStandartMarker(object));
 
-//Если нужно удалить слой
-// standartMarkerGroup.clearLayers();
-
-//Переключаться между слоями (ПРИМЕР)
-// nextButton.addEventListener('click', () => {
-//   standartMarkerGroup.clearLayers();
-//   similarObjects.slice(similarObjects.length / 2).forEach((point) => {
-//     createStandartMarker(point);
-//   });
-//   nextButton.remove();
-// });
-
-//*Reset
+//Reset
 resetButton.addEventListener('click', () => {
   mainMarker.setLatLng(DEFAULT_LOCATION);
 
@@ -94,3 +82,74 @@ resetButton.addEventListener('click', () => {
     DEFAULT_LOCATION
     , 12);
 });
+
+//* Реализация noUIslider
+
+const sliderElement = document.querySelector('.ad-form__slider');
+const valueElement = document.querySelector('#price');
+
+valueElement.value = 1000;
+
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 100000,
+  },
+  start: 1000,
+  step: 1,
+  connect: 'lower',
+  format: {
+    to:
+      (value) => Number.isInteger(value) ? value : value.toFixed(0),
+    from:
+      (value) => parseFloat(value),
+  },
+});
+
+sliderElement.noUiSlider.on('update', () => {
+  valueElement.value = sliderElement.noUiSlider.get();
+});
+
+//todo Следующие комменты для последующих заданий. Удалю позже
+
+//Если нужно удалить слой
+/*
+standartMarkerGroup.clearLayers();
+
+Переключаться между слоями (ПРИМЕР)
+nextButton.addEventListener('click', () => {
+  standartMarkerGroup.clearLayers();
+  similarObjects.slice(similarObjects.length / 2).forEach((point) => {
+    createStandartMarker(point);
+  });
+  nextButton.remove();
+});
+*/
+
+//Если нужно связать слайдер с событием
+/*
+specialElement.addEventListener('change', (evt) => {
+  if (evt.target.checked) {
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: 1,
+        max: 10
+      },
+      start: 8,
+      step: 0.1
+    });
+  } else {
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 100,
+      },
+      step: 1
+    });
+    sliderElement.noUiSlider.set(80);
+  }
+});
+*/
+
+// sliderElement.setAttribute('disabled', true); //Отключение слайдера
+// sliderElement.noUiSlider.destroy();  //Удаление слайдера
