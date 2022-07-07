@@ -55,6 +55,8 @@ const standartMarkericon = L.icon({
   iconAnchor: [20, 40],
 });
 
+const standartMarkerGroup = L.layerGroup().addTo(map);
+
 const createStandartMarker = ((item) => {
   const standartMarker = L.marker(
     {
@@ -66,13 +68,23 @@ const createStandartMarker = ((item) => {
     },
   );
   standartMarker
-    .addTo(map)
+    .addTo(standartMarkerGroup)
     .bindPopup(createCustomOffer(item));
-
-  return standartMarker;
 });
 
-similarObjects.map((object) => createStandartMarker(object));
+similarObjects.forEach((object) => createStandartMarker(object));
+
+//Если нужно удалить слой
+// standartMarkerGroup.clearLayers();
+
+//Переключаться между слоями (ПРИМЕР)
+// nextButton.addEventListener('click', () => {
+//   standartMarkerGroup.clearLayers();
+//   similarObjects.slice(similarObjects.length / 2).forEach((point) => {
+//     createStandartMarker(point);
+//   });
+//   nextButton.remove();
+// });
 
 //*Reset
 resetButton.addEventListener('click', () => {
