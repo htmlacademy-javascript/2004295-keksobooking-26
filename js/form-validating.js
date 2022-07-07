@@ -1,10 +1,4 @@
 const adForm = document.querySelector('.ad-form');
-const typeFieldElement = adForm.querySelector('#type'); //Поле 'Тип жилья'
-const priceFieldElement = adForm.querySelector('#price'); //Поле 'Цена'
-const timeinElement = adForm.querySelector('#timein'); //Поле 'Время заезда'
-const timeoutElement = adForm.querySelector('#timeout'); //Поле 'Время выезда'
-const roomFieldElement = adForm.querySelector('#room_number'); //Поле 'Количество комнат'
-const capacityFieldElement = adForm.querySelector('#capacity'); //Поле 'Количество мест'
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
@@ -12,6 +6,13 @@ const pristine = new Pristine(adForm, {
   errorTextTag: 'span',
   errorTextClass: 'ad-form__element--error',
 }, true);
+
+const typeFieldElement = adForm.querySelector('#type');
+const priceFieldElement = adForm.querySelector('#price');
+const timeinElement = adForm.querySelector('#timein');
+const timeoutElement = adForm.querySelector('#timeout');
+const roomFieldElement = adForm.querySelector('#room_number');
+const capacityFieldElement = adForm.querySelector('#capacity');
 
 //Зависимость поля «Цена за ночь» от поля «Тип жилья»:
 const minPrice = {
@@ -22,6 +23,7 @@ const minPrice = {
   'palace' : 10000,
 };
 
+//Валидация priceFieldElement
 const validatePrice = () => {
   const priceValue = minPrice[typeFieldElement.value]; //Берем значение из minPrice
   return priceFieldElement.value >= priceValue;
@@ -29,8 +31,26 @@ const validatePrice = () => {
 
 const getPriceErrorMessage = () => `Введите цену больше ${minPrice[typeFieldElement.value]}`;
 
-pristine.addValidator(priceFieldElement, validatePrice, getPriceErrorMessage);
+//Валидация roomFieldElement
+const validateRoom = () => {
+  const currentRoomValue = parseInt(roomFieldElement.value, 10); //Выбранное количество комнат
+  const currentCapacityValue = parseInt(capacityFieldElement.value, 10); //Выбранное количество гостей
+  if (currentCapacityValue === 0 || currentRoomValue === 100) {
+    return currentCapacityValue === 0 && currentRoomValue === 100;
+  }
+  return currentRoomValue >= currentCapacityValue;
+};
 
+const getRoomErrorMessage = () => {
+  if (parseInt(roomFieldElement.value, 10) === 1) {
+    return 'Не более 1 гостя';
+  } else if (parseInt(roomFieldElement.value, 10) === 100) {
+    return 'Не для гостей';
+  }
+  return `Не более ${roomFieldElement.value} гостей`;
+};
+
+//События при "change"
 const onChange = (evt) => {
   if (evt.target === typeFieldElement) {
     priceFieldElement.setAttribute('min', minPrice[typeFieldElement.value]);
@@ -48,28 +68,8 @@ const onChange = (evt) => {
 
 adForm.addEventListener('change', onChange);
 
-//Валидация checkin и checkout (синхронизация)
-// timeinElement.addEventListener('change', () => {
-//   timeoutElement.value = timeinElement.value;
-// });
-
-// timeoutElement.addEventListener('change', () => {
-//   timeinElement.value = timeoutElement.value;
-// });
-
-//Валидация roomFieldElement
-const validateRoom = () => {
-  const currentRoomValue = parseInt(roomFieldElement.value, 10); //Выбранное количество комнат
-  const currentCapacityValue = parseInt(capacityFieldElement.value, 10); //Выбранное количество гостей
-
-  if (currentCapacityValue === 0 || currentRoomValue === 100) {
-    return currentCapacityValue === 0 && currentRoomValue === 100;
-  }
-  return currentRoomValue >= currentCapacityValue;
-};
-
-pristine.addValidator(roomFieldElement, validateRoom, 'Измените количество комнат/гостей');
-pristine.addValidator(capacityFieldElement, validateRoom, 'Измените количество комнат/гостей');
+pristine.addValidator(priceFieldElement, validatePrice, getPriceErrorMessage);
+pristine.addValidator(roomFieldElement, validateRoom, getRoomErrorMessage);
 
 adForm.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {
