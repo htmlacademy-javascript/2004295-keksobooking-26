@@ -1,7 +1,7 @@
 import {makeFormActive} from './form-toggle.js';
 import {makeFormDisabled} from './form-toggle.js';
 import {similarObjects} from './data.js';
-import {fragment} from './offer-generate.js';
+import {createCustomOffer} from './offer-generate.js';
 
 makeFormDisabled();
 
@@ -17,7 +17,7 @@ const map = L.map('map-canvas')
   })
   .setView(
     DEFAULT_LOCATION
-    , 11);
+    , 12);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -67,7 +67,7 @@ const createStandartMarker = ((item) => {
   );
   standartMarker
     .addTo(map)
-    .bindPopup(fragment);
+    .bindPopup(createCustomOffer(item));
 });
 
 similarObjects.forEach((item) => {
@@ -80,5 +80,5 @@ resetButton.addEventListener('click', () => {
 
   map.setView(
     DEFAULT_LOCATION
-    , 11);
+    , 12);
 });
