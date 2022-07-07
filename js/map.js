@@ -26,7 +26,7 @@ L.tileLayer(
   },
 ).addTo(map);
 
-//*main marker
+//main marker
 const mainMarkerIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
@@ -48,7 +48,7 @@ mainMarker.on('moveend', (evt) => {
   addressElement.value = `${(evt.target.getLatLng().lat).toFixed(5)}, ${(evt.target.getLatLng().lng).toFixed(5)}`;
 });
 
-//*standart marker
+//standart marker
 const standartMarkericon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
@@ -68,11 +68,11 @@ const createStandartMarker = ((item) => {
   standartMarker
     .addTo(map)
     .bindPopup(createCustomOffer(item));
+
+  return standartMarker;
 });
 
-similarObjects.forEach((item) => {
-  createStandartMarker(item);
-});
+similarObjects.map((object) => createStandartMarker(object));
 
 //*Reset
 resetButton.addEventListener('click', () => {
