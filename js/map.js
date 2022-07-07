@@ -1,7 +1,7 @@
 import {makeFormActive} from './form-toggle.js';
 import {makeFormDisabled} from './form-toggle.js';
 import {similarObjects} from './data.js';
-import {createCustomOffer} from './offer-generate.js';
+import {createCustomCard} from './card-generate.js';
 
 makeFormDisabled();
 
@@ -43,7 +43,7 @@ const mainMarker = L.marker(
 
 mainMarker.addTo(map);
 
-mainMarker.on('moveend', (evt) => {
+mainMarker.on('drag', (evt) => {
   const addressElement = document.querySelector('#address');
   addressElement.value = `${(evt.target.getLatLng().lat).toFixed(5)}, ${(evt.target.getLatLng().lng).toFixed(5)}`;
 });
@@ -58,7 +58,7 @@ const standartMarkericon = L.icon({
 const standartMarkerGroup = L.layerGroup().addTo(map);
 
 const createStandartMarker = ((item) => {
-  const standartMarker = L.marker(
+  L.marker(
     {
       lat: item.location.lat,
       lng: item.location.lng,
@@ -66,49 +66,53 @@ const createStandartMarker = ((item) => {
     {
       icon: standartMarkericon,
     },
-  );
-  standartMarker
+  )
     .addTo(standartMarkerGroup)
-    .bindPopup(createCustomOffer(item));
+    .bindPopup(createCustomCard(item));
 });
 
 similarObjects.forEach((object) => createStandartMarker(object));
-
-//Reset
-resetButton.addEventListener('click', () => {
-  mainMarker.setLatLng(DEFAULT_LOCATION);
-
-  map.setView(
-    DEFAULT_LOCATION
-    , 12);
-});
 
 //* Реализация noUIslider
 
 const sliderElement = document.querySelector('.ad-form__slider');
 const valueElement = document.querySelector('#price');
+const DEFAULT_PRICE_VALUE = 1000;
 
-valueElement.value = 1000;
+valueElement.value = DEFAULT_PRICE_VALUE;
 
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 100000,
   },
-  start: 1000,
+  start: DEFAULT_PRICE_VALUE,
   step: 1,
   connect: 'lower',
   format: {
     to:
-      (value) => Number.isInteger(value) ? value : value.toFixed(0),
+    (value) => Number.isInteger(value) ? value : value.toFixed(0),
     from:
-      (value) => parseFloat(value),
+    (value) => parseFloat(value),
   },
 });
 
 sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
 });
+
+//Reset
+const onReset = () => {
+  mainMarker.setLatLng(DEFAULT_LOCATION);
+
+  map.setView(
+    DEFAULT_LOCATION
+    , 12);
+
+  sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
+};
+
+resetButton.addEventListener('click', () => onReset());
 
 //todo Следующие комменты для последующих заданий. Удалю позже
 

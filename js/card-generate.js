@@ -1,4 +1,4 @@
-const TYPE_TRANSLATE = {
+const translateType = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
@@ -8,7 +8,7 @@ const TYPE_TRANSLATE = {
 const templateFragment = document.querySelector('#card').content;
 const template = templateFragment.querySelector('.popup');
 
-const createCustomOffer = (newItem) => {
+const createCustomCard = (card) => {
   const element = template.cloneNode(true);
   const titleElement = element.querySelector('.popup__title');
   const addressElement = element.querySelector('.popup__text--address');
@@ -24,11 +24,11 @@ const createCustomOffer = (newItem) => {
   const photoElement = element.querySelector('.popup__photo'); // Элемент photo в контейнере
 
   // offer.features
-  const featuresArray = newItem.offer.features;
+  const featuresArray = card.offer.features;
   if (featuresArray) {
     const modifiers = featuresArray.map((anyFeature) => `popup__feature--${anyFeature}`);
     featuresListElement.forEach((feature) => {
-      if (!modifiers.includes(newItem)) {
+      if (!modifiers.includes(card)) {
         feature.remove();
       }
     });
@@ -37,11 +37,11 @@ const createCustomOffer = (newItem) => {
   }
 
   // offer.type
-  const typeEng = newItem.offer.type || '';
-  typeElement.textContent = TYPE_TRANSLATE[typeEng] || '';
+  const typeEng = card.offer.type || '';
+  typeElement.textContent = translateType[typeEng] || '';
 
   // offer.photos
-  const photosArray = newItem.offer.photos;
+  const photosArray = card.offer.photos;
   photosContainerElement.innerHTML = '';
   if (photosArray) {
     photosArray.forEach((photo) => {
@@ -51,15 +51,15 @@ const createCustomOffer = (newItem) => {
     });
   }
 
-  titleElement.textContent = newItem.offer.title || '';
-  addressElement.textContent = newItem.offer.address || '';
-  priceElement.innerHTML = newItem.offer.price ? `${newItem.offer.price  }<span>₽/ночь</span>` : '';
-  guestRoomsElement.textContent = newItem.offer.rooms && newItem.offer.guests ? `${newItem.offer.rooms} комнаты для ${newItem.offer.guests} гостей` : '';
-  timeCheckElement.textContent = newItem.offer.checkin && newItem.offer.checkout ? `Заезд после ${newItem.offer.checkin}, выезд до ${newItem.offer.checkout}` : '';
-  descriptionElement.textContent = newItem.offer.description || '';
-  avatarElement.src = newItem.author.avatar ? newItem.author.avatar : avatarElement.style.display = 'none';
+  titleElement.textContent = card.offer.title || '';
+  addressElement.textContent = card.offer.address || '';
+  priceElement.innerHTML = card.offer.price ? `${card.offer.price  }<span>₽/ночь</span>` : '';
+  guestRoomsElement.textContent = card.offer.rooms && card.offer.guests ? `${card.offer.rooms} комнаты для ${card.offer.guests} гостей` : '';
+  timeCheckElement.textContent = card.offer.checkin && card.offer.checkout ? `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}` : '';
+  descriptionElement.textContent = card.offer.description || '';
+  avatarElement.src = card.author.avatar ? card.author.avatar : avatarElement.style.display = 'none';
 
   return element;
 };
 
-export {createCustomOffer};
+export {createCustomCard};
