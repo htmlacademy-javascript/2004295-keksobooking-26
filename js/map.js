@@ -1,6 +1,6 @@
 import {makeFormActive} from './form-toggle.js';
 import {makeFormDisabled} from './form-toggle.js';
-import {similarObjects} from './data.js';
+import {similarOffers} from './data.js';
 import {createCustomCard} from './card-generate.js';
 
 makeFormDisabled();
@@ -71,7 +71,7 @@ const createStandartMarker = ((item) => {
     .bindPopup(createCustomCard(item));
 });
 
-similarObjects.forEach((object) => createStandartMarker(object));
+similarOffers.forEach((offer) => createStandartMarker(offer));
 
 //* Реализация noUIslider
 
@@ -123,7 +123,7 @@ standartMarkerGroup.clearLayers();
 Переключаться между слоями (ПРИМЕР)
 nextButton.addEventListener('click', () => {
   standartMarkerGroup.clearLayers();
-  similarObjects.slice(similarObjects.length / 2).forEach((point) => {
+  similarOffers.slice(similarOffers.length / 2).forEach((point) => {
     createStandartMarker(point);
   });
   nextButton.remove();
