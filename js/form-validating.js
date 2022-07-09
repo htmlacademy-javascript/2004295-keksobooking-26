@@ -1,3 +1,5 @@
+import {showSuccessAlert} from './util.js';
+
 const adForm = document.querySelector('.ad-form');
 
 const pristine = new Pristine(adForm, {
@@ -72,8 +74,31 @@ pristine.addValidator(priceFieldElement, validatePrice, getPriceErrorMessage);
 pristine.addValidator(roomFieldElement, validateRoom, getRoomErrorMessage);
 
 adForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
+  const isValid = pristine.validate();
+  evt.preventDefault();
+
+  if (isValid) {
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://26.javascript.pages.academy/kksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+      .then((response) => {
+        if (response.ok) {
+          showSuccessAlert();
+        } else {
+          // eslint-disable-next-line no-console
+          console.log('Не удалось отправить форму. Попробуйте ещё раз');
+        }
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.log('Не удалось отправить форму. Попробуйте ещё раз');
+      });
   }
 });
 

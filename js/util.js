@@ -43,4 +43,23 @@ const getRandomArray = (array) => {
   return newArray;
 };
 
-export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getRandomArray};
+//get success message
+const templateSuccessFragment = document.querySelector('#success').content;
+const templateSuccess = templateSuccessFragment.querySelector('.success');
+const submitFieldElement = document.querySelector('.ad-form__element--submit');
+
+const showSuccessAlert = () => {
+  const successContainer = templateSuccess.cloneNode(true);
+  const successElement = successContainer.querySelector('.success__message');
+
+  successElement.style.color = 'blue';
+  successElement.style.fontSize = '20px';
+
+  submitFieldElement.append(successElement);
+
+  setTimeout(() => {
+    successElement.remove();
+  }, 3000);
+};
+
+export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getRandomArray, showSuccessAlert};
