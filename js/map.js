@@ -1,6 +1,6 @@
 import {makeFormActive} from './form-toggle.js';
 import {makeFormDisabled} from './form-toggle.js';
-import {similarOffers} from './data.js';
+// import {similarOffers} from './data.js';
 import {createCustomCard} from './card-generate.js';
 
 makeFormDisabled();
@@ -71,7 +71,7 @@ const createStandartMarker = ((item) => {
     .bindPopup(createCustomCard(item));
 });
 
-similarOffers.forEach((offer) => createStandartMarker(offer));
+// similarOffers.forEach((offer) => createStandartMarker(offer));
 
 //* Реализация noUIslider
 
@@ -157,3 +157,5 @@ specialElement.addEventListener('change', (evt) => {
 
 // sliderElement.setAttribute('disabled', true); //Отключение слайдера
 // sliderElement.noUiSlider.destroy();  //Удаление слайдера
+
+export {createStandartMarker};
