@@ -22,16 +22,28 @@ const showSuccessAlert = () => {
   const successElement = successContainer.querySelector('.success__message');
 
   successElement.style.color = 'green';
-  successElement.style.fontSize = '20px';
+  successElement.style.fontSize = '18px';
   successElement.style.position = 'fixed';
-  successElement.style.bottom = '15%';
-  successElement.style.left = '5%';
+  successElement.style.top = '15%';
+  successElement.style.left = '4%';
 
   submitFieldElement.append(successElement);
 
-  setTimeout(() => {
+  const escAlertClose = (evt) => {
+    if (evt.key === 'Escape') {
+      successElement.remove();
+      document.removeEventListener('keydown', escAlertClose);
+    }
+  };
+
+  document.addEventListener('keydown', escAlertClose);
+
+  const clickAlertClose = () => {
+    document.removeEventListener('click', clickAlertClose);
     successElement.remove();
-  }, 3000);
+  };
+
+  document.addEventListener('click', clickAlertClose);
 };
 
 //Error alert
@@ -41,19 +53,33 @@ const templateError = templateErrorFragment.querySelector('.error');
 const showErrorAlert = () => {
   const errorContainer = templateError.cloneNode(true);
   const errorElement = errorContainer.querySelector('.error__message');
-  // const errorButton = errorContainer.querySelector('.error__button');
+  const errorButton = errorContainer.querySelector('.error__button');
 
   errorElement.style.color = 'red';
-  errorElement.style.fontSize = '20px';
+  errorElement.style.fontSize = '18px';
   errorElement.style.position = 'fixed';
-  errorElement.style.bottom = '15%';
-  errorElement.style.left = '5%';
+  errorElement.style.top = '15%';
+  errorElement.style.left = '2%';
 
+  submitFieldElement.innerHTML = '';
   submitFieldElement.append(errorElement);
+  submitFieldElement.append(errorButton);
 
-  setTimeout(() => {
+  const escAlertClose = (evt) => {
+    if (evt.key === 'Escape') {
+      errorElement.remove();
+      document.removeEventListener('keydown', escAlertClose);
+    }
+  };
+
+  document.addEventListener('keydown', escAlertClose);
+
+  const clickAlertClose = () => {
+    document.removeEventListener('click', clickAlertClose);
     errorElement.remove();
-  }, 3000);
+  };
+
+  document.addEventListener('click', clickAlertClose);
 };
 
 export {getRandomPositiveInteger, showSuccessAlert, showErrorAlert};
