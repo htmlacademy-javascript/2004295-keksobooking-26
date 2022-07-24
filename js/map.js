@@ -1,5 +1,4 @@
 import {makeFormActive, makeFormDisabled} from './form-toggle.js';
-// import {similarOffers} from './data.js';
 import {createCustomCard} from './card-generate.js';
 
 makeFormDisabled();
@@ -70,8 +69,6 @@ const createStandartMarker = ((item) => {
     .bindPopup(createCustomCard(item));
 });
 
-// similarOffers.forEach((offer) => createStandartMarker(offer));
-
 //* Реализация noUIslider
 
 const sliderElement = document.querySelector('.ad-form__slider');
@@ -113,48 +110,4 @@ const onReset = () => {
 
 resetButton.addEventListener('click', () => onReset());
 
-//todo Следующие комменты для последующих заданий. Удалю позже
-
-//Если нужно удалить слой
-/*
-standartMarkerGroup.clearLayers();
-
-Переключаться между слоями (ПРИМЕР)
-nextButton.addEventListener('click', () => {
-  standartMarkerGroup.clearLayers();
-  similarOffers.slice(similarOffers.length / 2).forEach((point) => {
-    createStandartMarker(point);
-  });
-  nextButton.remove();
-});
-*/
-
-//Если нужно связать слайдер с событием
-/*
-specialElement.addEventListener('change', (evt) => {
-  if (evt.target.checked) {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 1,
-        max: 10
-      },
-      start: 8,
-      step: 0.1
-    });
-  } else {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 100,
-      },
-      step: 1
-    });
-    sliderElement.noUiSlider.set(80);
-  }
-});
-*/
-
-// sliderElement.setAttribute('disabled', true); //Отключение слайдера
-// sliderElement.noUiSlider.destroy();  //Удаление слайдера
-
-export {createStandartMarker};
+export {createStandartMarker, onReset};

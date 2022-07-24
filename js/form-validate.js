@@ -1,4 +1,4 @@
-import {showSuccessAlert, showErrorAlert} from './utils.js';
+import {sendData} from './server.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -78,25 +78,7 @@ adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   if (isValid) {
-    const formData = new FormData(evt.target);
-
-    fetch(
-      'https://26.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    )
-      .then((response) => {
-        if (response.ok) {
-          showSuccessAlert();
-        } else {
-          showErrorAlert();
-        }
-      })
-      .catch(() => {
-        throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
-      });
+    sendData(new FormData(evt.target));
   }
 });
 
