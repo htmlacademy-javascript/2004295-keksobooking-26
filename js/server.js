@@ -4,16 +4,21 @@ import {resetForm} from './form-validate.js';
 
 const SIMILAR_OFFERS_COUNT = getRandomPositiveInteger(1, 10);
 const submitButton = document.querySelector('.ad-form__submit');
+const filterFormElement = document.querySelector('.map__filters');
 
 const renderOffers = (offers) => {
   offers.slice(0, SIMILAR_OFFERS_COUNT).forEach((offer) => createStandartMarker(offer));
 };
 
 const getData = (onSuccess) => {
+  filterFormElement.classList.add('ad-form--disabled');
   fetch('https://26.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
     .then((offers) => {
       onSuccess(offers);
+    })
+    .then(() => {
+      filterFormElement.classList.remove('ad-form--disabled');
     })
     .catch(() => {
       throw new Error('Не удалось загрузить данные');
