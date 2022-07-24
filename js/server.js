@@ -1,7 +1,7 @@
 import {createStandartMarker} from './map.js';
-import {getRandomPositiveInteger} from './util.js';
+import {getRandomPositiveInteger} from './utils.js';
 
-const SIMILAR_OBJECTS_COUNT = getRandomPositiveInteger(1, 50);
+const SIMILAR_OBJECTS_COUNT = getRandomPositiveInteger(1, 10);
 
 fetch('https://26.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())

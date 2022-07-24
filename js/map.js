@@ -1,5 +1,4 @@
-import {makeFormActive} from './form-toggle.js';
-import {makeFormDisabled} from './form-toggle.js';
+import {makeFormActive, makeFormDisabled} from './form-toggle.js';
 // import {similarOffers} from './data.js';
 import {createCustomCard} from './card-generate.js';
 

@@ -1,4 +1,4 @@
-import {showSuccessAlert} from './util.js';
+import {showSuccessAlert} from './utils.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -81,7 +81,7 @@ adForm.addEventListener('submit', (evt) => {
     const formData = new FormData(evt.target);
 
     fetch(
-      'https://26.javascript.pages.academy/kksobooking',
+      'https://26.javascript.pages.academy/keksobooking',
       {
         method: 'POST',
         body: formData,
