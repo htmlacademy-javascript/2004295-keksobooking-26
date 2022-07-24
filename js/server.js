@@ -1,5 +1,6 @@
 import {createStandartMarker} from './map.js';
 import {getRandomPositiveInteger, showSuccessAlert, showErrorAlert} from './utils.js';
+import {resetForm} from './form-validate.js';
 
 const SIMILAR_OFFERS_COUNT = getRandomPositiveInteger(1, 10);
 const submitButton = document.querySelector('.ad-form__submit');
@@ -33,7 +34,7 @@ const sendData = (body) => {
     .then((response) => {
       if (response.ok) {
         showSuccessAlert();
-        // resetForm();
+        resetForm();
       } else {
         showErrorAlert();
       }

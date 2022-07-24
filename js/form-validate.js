@@ -74,6 +74,13 @@ adForm.addEventListener('change', onChange);
 pristine.addValidator(priceFieldElement, validatePrice, getPriceErrorMessage);
 pristine.addValidator(roomFieldElement, validateRoom, getRoomErrorMessage);
 
+//Reset form
+const resetForm = () => {
+  adForm.reset();
+  pristine.reset();
+  mapReset();
+};
+
 adForm.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   evt.preventDefault();
@@ -81,17 +88,13 @@ adForm.addEventListener('submit', (evt) => {
   if (isValid) {
     const formData = new FormData(evt.target);
     sendData(formData);
+    resetForm();
   }
 });
-
-//Form reset
-const resetForm = () => {
-  adForm.reset();
-  pristine.reset();
-  mapReset();
-};
 
 adForm.addEventListener('reset', () => {
   pristine.reset();
   resetForm();
 });
+
+export {resetForm};
