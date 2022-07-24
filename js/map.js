@@ -97,8 +97,8 @@ sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
 });
 
-//Reset
-const onReset = () => {
+//Map reset
+const mapReset = () => {
   mainMarker.setLatLng(DEFAULT_LOCATION);
 
   map.setView(
@@ -108,6 +108,6 @@ const onReset = () => {
   sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
 };
 
-resetButton.addEventListener('click', () => onReset());
+resetButton.addEventListener('click', () => mapReset());
 
-export {createStandartMarker, onReset};
+export {createStandartMarker, mapReset};

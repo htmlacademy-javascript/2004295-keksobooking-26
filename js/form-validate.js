@@ -1,4 +1,5 @@
 import {sendData} from './server.js';
+import {mapReset} from './map.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -78,10 +79,19 @@ adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   if (isValid) {
-    sendData(new FormData(evt.target));
+    const formData = new FormData(evt.target);
+    sendData(formData);
   }
 });
 
+//Form reset
+const resetForm = () => {
+  adForm.reset();
+  pristine.reset();
+  mapReset();
+};
+
 adForm.addEventListener('reset', () => {
   pristine.reset();
+  resetForm();
 });
