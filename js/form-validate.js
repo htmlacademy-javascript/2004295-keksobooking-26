@@ -1,4 +1,4 @@
-import {showSuccessAlert} from './utils.js';
+import {showSuccessAlert, showErrorAlert} from './utils.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -81,7 +81,7 @@ adForm.addEventListener('submit', (evt) => {
     const formData = new FormData(evt.target);
 
     fetch(
-      'https://26.javascript.pages.academy/keksobooking',
+      'https://26.javascript.pages.academy/keksdobooking',
       {
         method: 'POST',
         body: formData,
@@ -91,13 +91,11 @@ adForm.addEventListener('submit', (evt) => {
         if (response.ok) {
           showSuccessAlert();
         } else {
-          // eslint-disable-next-line no-console
-          console.log('Не удалось отправить форму. Попробуйте ещё раз');
+          showErrorAlert();
         }
       })
       .catch(() => {
-        // eslint-disable-next-line no-console
-        console.log('Не удалось отправить форму. Попробуйте ещё раз');
+        throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
       });
   }
 });
