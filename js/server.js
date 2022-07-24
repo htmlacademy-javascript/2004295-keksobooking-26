@@ -11,18 +11,14 @@ const renderOffers = (offers) => {
 };
 
 const getData = (onSuccess) => {
+
   filterFormElement.classList.add('ad-form--disabled');
+
   fetch('https://26.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
-    .then((offers) => {
-      onSuccess(offers);
-    })
-    .then(() => {
-      filterFormElement.classList.remove('ad-form--disabled');
-    })
-    .catch(() => {
-      showErrorAlert('Не удалось загрузить данные');
-    });
+    .then((offers) => onSuccess(offers))
+    .then(() => filterFormElement.classList.remove('ad-form--disabled'))
+    .catch(() => showErrorAlert('Не удалось загрузить данные'));
 };
 
 getData(renderOffers);
@@ -30,7 +26,7 @@ getData(renderOffers);
 const sendData = (body) => {
   submitButton.disabled = true;
   fetch(
-    'https://26.javascript.pages.academy/keksoboking',
+    'https://26.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
       body,
@@ -44,9 +40,7 @@ const sendData = (body) => {
         showErrorAlert('Не удалось отправить данные');
       }
     })
-    .catch(() => {
-      showErrorAlert();
-    })
+    .catch(showErrorAlert)
     .finally(submitButton.disabled = false);
 };
 
