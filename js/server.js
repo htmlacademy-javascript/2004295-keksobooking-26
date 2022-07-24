@@ -21,7 +21,7 @@ const getData = (onSuccess) => {
       filterFormElement.classList.remove('ad-form--disabled');
     })
     .catch(() => {
-      throw new Error('Не удалось загрузить данные');
+      showErrorAlert('Не удалось загрузить данные');
     });
 };
 
@@ -30,7 +30,7 @@ getData(renderOffers);
 const sendData = (body) => {
   submitButton.disabled = true;
   fetch(
-    'https://26.javascript.pages.academy/keksobooking',
+    'https://26.javascript.pages.academy/keksoboking',
     {
       method: 'POST',
       body,
@@ -41,11 +41,11 @@ const sendData = (body) => {
         showSuccessAlert();
         resetForm();
       } else {
-        showErrorAlert();
+        showErrorAlert('Не удалось отправить данные');
       }
     })
     .catch(() => {
-      throw new Error('Не удалось отправить данные');
+      showErrorAlert();
     })
     .finally(submitButton.disabled = false);
 };

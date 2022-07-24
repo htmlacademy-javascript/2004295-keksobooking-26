@@ -50,10 +50,12 @@ const showSuccessAlert = () => {
 const templateErrorFragment = document.querySelector('#error').content;
 const templateError = templateErrorFragment.querySelector('.error');
 
-const showErrorAlert = () => {
+const showErrorAlert = (errorText) => {
   const errorContainer = templateError.cloneNode(true);
   const errorElement = errorContainer.querySelector('.error__message');
   const errorButton = errorContainer.querySelector('.error__button');
+
+  errorElement.textContent = errorText;
 
   errorElement.style.color = 'red';
   errorElement.style.fontSize = '18px';

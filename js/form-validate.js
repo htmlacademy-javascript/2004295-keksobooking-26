@@ -88,7 +88,6 @@ adForm.addEventListener('submit', (evt) => {
   if (isValid) {
     const formData = new FormData(evt.target);
     sendData(formData);
-    resetForm();
   }
 });
 
