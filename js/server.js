@@ -17,8 +17,8 @@ const getData = (onSuccess) => {
   fetch('https://26.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
     .then((offers) => onSuccess(offers))
-    .then(() => filterFormElement.classList.remove('ad-form--disabled'))
-    .catch(() => showErrorAlert('Не удалось загрузить данные'));
+    .catch(() => showErrorAlert('Не удалось загрузить данные'))
+    .finally(() => filterFormElement.classList.remove('ad-form--disabled'));
 };
 
 getData(renderOffers);
