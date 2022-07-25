@@ -84,4 +84,13 @@ const showErrorAlert = (errorText = 'Не удалось отправить да
   document.addEventListener('click', clickAlertClose);
 };
 
-export {getRandomPositiveInteger, showSuccessAlert, showErrorAlert};
+//Debounce
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRandomPositiveInteger, showSuccessAlert, showErrorAlert, debounce};
