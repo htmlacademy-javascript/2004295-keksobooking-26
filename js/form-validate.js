@@ -1,4 +1,4 @@
-import {sendData} from './server.js';
+import {sendData} from './api.js';
 import {mapReset} from './map.js';
 import {showSuccessAlert, showErrorAlert} from './utils.js';
 

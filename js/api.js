@@ -1,10 +1,10 @@
 import {createStandartMarker} from './map.js';
 import {getRandomPositiveInteger, showErrorAlert} from './utils.js';
 
-const SIMILAR_OFFERS_COUNT = getRandomPositiveInteger(1, 10);
 
 const filterFormElement = document.querySelector('.map__filters');
 
+const SIMILAR_OFFERS_COUNT = getRandomPositiveInteger(1, 10);
 const renderOffers = (offers) => {
   offers.slice(0, SIMILAR_OFFERS_COUNT).forEach((offer) => createStandartMarker(offer));
 };
