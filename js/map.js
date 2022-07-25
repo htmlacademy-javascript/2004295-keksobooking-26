@@ -1,6 +1,4 @@
-import {makeFormActive} from './form-toggle.js';
-import {makeFormDisabled} from './form-toggle.js';
-import {similarOffers} from './data.js';
+import {makeFormActive, makeFormDisabled} from './form-toggle.js';
 import {createCustomCard} from './card-generate.js';
 
 makeFormDisabled();
@@ -71,8 +69,6 @@ const createStandartMarker = ((item) => {
     .bindPopup(createCustomCard(item));
 });
 
-similarOffers.forEach((offer) => createStandartMarker(offer));
-
 //* Реализация noUIslider
 
 const sliderElement = document.querySelector('.ad-form__slider');
@@ -101,8 +97,8 @@ sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
 });
 
-//Reset
-const onReset = () => {
+//Map reset
+const mapReset = () => {
   mainMarker.setLatLng(DEFAULT_LOCATION);
 
   map.setView(
@@ -112,48 +108,6 @@ const onReset = () => {
   sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
 };
 
-resetButton.addEventListener('click', () => onReset());
+resetButton.addEventListener('click', () => mapReset());
 
-//todo Следующие комменты для последующих заданий. Удалю позже
-
-//Если нужно удалить слой
-/*
-standartMarkerGroup.clearLayers();
-
-Переключаться между слоями (ПРИМЕР)
-nextButton.addEventListener('click', () => {
-  standartMarkerGroup.clearLayers();
-  similarOffers.slice(similarOffers.length / 2).forEach((point) => {
-    createStandartMarker(point);
-  });
-  nextButton.remove();
-});
-*/
-
-//Если нужно связать слайдер с событием
-/*
-specialElement.addEventListener('change', (evt) => {
-  if (evt.target.checked) {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 1,
-        max: 10
-      },
-      start: 8,
-      step: 0.1
-    });
-  } else {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 100,
-      },
-      step: 1
-    });
-    sliderElement.noUiSlider.set(80);
-  }
-});
-*/
-
-// sliderElement.setAttribute('disabled', true); //Отключение слайдера
-// sliderElement.noUiSlider.destroy();  //Удаление слайдера
+export {createStandartMarker, mapReset};
