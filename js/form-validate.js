@@ -1,7 +1,15 @@
 import {sendData} from './server.js';
 import {mapReset} from './map.js';
+import {showSuccessAlert, showErrorAlert} from './utils.js';
 
 const adForm = document.querySelector('.ad-form');
+const typeFieldElement = adForm.querySelector('#type');
+const priceFieldElement = adForm.querySelector('#price');
+const timeinElement = adForm.querySelector('#timein');
+const timeoutElement = adForm.querySelector('#timeout');
+const roomFieldElement = adForm.querySelector('#room_number');
+const capacityFieldElement = adForm.querySelector('#capacity');
+const submitButton = document.querySelector('.ad-form__submit');
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
@@ -9,13 +17,6 @@ const pristine = new Pristine(adForm, {
   errorTextTag: 'span',
   errorTextClass: 'ad-form__element--error',
 }, true);
-
-const typeFieldElement = adForm.querySelector('#type');
-const priceFieldElement = adForm.querySelector('#price');
-const timeinElement = adForm.querySelector('#timein');
-const timeoutElement = adForm.querySelector('#timeout');
-const roomFieldElement = adForm.querySelector('#room_number');
-const capacityFieldElement = adForm.querySelector('#capacity');
 
 //Зависимость поля «Цена за ночь» от поля «Тип жилья»:
 const minPrice = {
@@ -81,13 +82,25 @@ const resetForm = () => {
   mapReset();
 };
 
+const onSubmitSuccess = () => {
+  showSuccessAlert();
+  resetForm();
+  submitButton.disabled = false;
+};
+
+const onSubmitError = () => {
+  showErrorAlert('Не удалось отправить данные');
+  submitButton.disabled = false;
+};
+
 adForm.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   evt.preventDefault();
 
   if (isValid) {
+    submitButton.disabled = true;
     const formData = new FormData(evt.target);
-    sendData(formData);
+    sendData(formData, onSubmitSuccess, onSubmitError);
   }
 });
 

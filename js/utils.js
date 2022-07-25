@@ -50,7 +50,7 @@ const showSuccessAlert = () => {
 const templateErrorFragment = document.querySelector('#error').content;
 const templateError = templateErrorFragment.querySelector('.error');
 
-const showErrorAlert = (errorText) => {
+const showErrorAlert = (errorText = 'Не удалось отправить данные') => {
   const errorContainer = templateError.cloneNode(true);
   const errorElement = errorContainer.querySelector('.error__message');
   const errorButton = errorContainer.querySelector('.error__button');
