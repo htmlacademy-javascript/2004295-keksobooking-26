@@ -1,6 +1,8 @@
 import './form-validate.js';
 import './map.js';
 import './api.js';
+import './map-filters.js';
+import './pictures-upload.js';
 import {getData} from './api.js';
 import {createStandartMarker} from './map.js';
 import {showErrorAlert, getRandomPositiveInteger} from './utils.js';

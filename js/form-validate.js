@@ -1,6 +1,7 @@
 import {sendData} from './api.js';
 import {mapReset} from './map.js';
 import {showSuccessAlert, showErrorAlert} from './utils.js';
+import {resetUpload} from './pictures-upload.js';
 
 const adForm = document.querySelector('.ad-form');
 const typeFieldElement = adForm.querySelector('#type');
@@ -107,6 +108,7 @@ adForm.addEventListener('submit', (evt) => {
 adForm.addEventListener('reset', () => {
   pristine.reset();
   resetForm();
+  resetUpload();
 });
 
 export {resetForm};
