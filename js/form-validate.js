@@ -89,7 +89,7 @@ const onSubmitSuccess = () => {
 };
 
 const onSubmitError = () => {
-  showErrorAlert('Не удалось отправить данные');
+  showErrorAlert();
   submitButton.disabled = false;
 };
 

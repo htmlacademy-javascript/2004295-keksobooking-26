@@ -1,7 +1,5 @@
-import {makeFormActive, makeFormDisabled} from './form-toggle.js';
 import {createCustomCard} from './card-generate.js';
-
-makeFormDisabled();
+import {makeFormActive} from './form-toggle.js';
 
 const resetButton = document.querySelector('.ad-form__reset');
 const DEFAULT_LOCATION = {
@@ -11,7 +9,6 @@ const DEFAULT_LOCATION = {
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    makeFormActive();
   })
   .setView(
     DEFAULT_LOCATION
@@ -67,6 +64,7 @@ const createStandartMarker = ((item) => {
   )
     .addTo(standartMarkerGroup)
     .bindPopup(createCustomCard(item));
+  makeFormActive();
 });
 
 //* Реализация noUIslider

@@ -4,6 +4,9 @@ import './api.js';
 import {getData} from './api.js';
 import {createStandartMarker} from './map.js';
 import {showErrorAlert, getRandomPositiveInteger} from './utils.js';
+import {makeFormDisabled} from './form-toggle.js';
+
+makeFormDisabled();
 
 const SIMILAR_OFFERS_COUNT = getRandomPositiveInteger(1, 10);
 const renderOffers = (offers) => {
