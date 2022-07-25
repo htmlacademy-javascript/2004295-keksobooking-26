@@ -1,13 +1,6 @@
-import {createStandartMarker} from './map.js';
-import {getRandomPositiveInteger, showErrorAlert} from './utils.js';
-
+import {showErrorAlert} from './utils.js';
 
 const filterFormElement = document.querySelector('.map__filters');
-
-const SIMILAR_OFFERS_COUNT = getRandomPositiveInteger(1, 10);
-const renderOffers = (offers) => {
-  offers.slice(0, SIMILAR_OFFERS_COUNT).forEach((offer) => createStandartMarker(offer));
-};
 
 const getData = (onSuccess, onError) => {
 
@@ -28,8 +21,6 @@ const getData = (onSuccess, onError) => {
     .finally(() => filterFormElement.classList.remove('ad-form--disabled'));
 };
 
-getData(renderOffers, () => showErrorAlert('Не удалось загрузить данные'));
-
 const sendData = (body, onSuccess, onError) => {
   fetch(
     'https://26.javascript.pages.academy/keksobooking',
@@ -48,4 +39,4 @@ const sendData = (body, onSuccess, onError) => {
     .catch(showErrorAlert);
 };
 
-export {sendData};
+export {getData, sendData};
