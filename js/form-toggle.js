@@ -1,7 +1,7 @@
 const infoFormElement = document.querySelector('.ad-form');
 const filterFormElement = document.querySelector('.map__filters');
-const interactiveFormElements = infoFormElement.querySelectorAll('fieldset,select,input,textarea,button');
 const interactiveFilterElements = filterFormElement.querySelectorAll('fieldset,select,input');
+const interactiveFormElements = infoFormElement.querySelectorAll('fieldset,select,input,textarea,button');
 
 const DISABLED_FORM_CLASS = 'ad-form--disabled';
 

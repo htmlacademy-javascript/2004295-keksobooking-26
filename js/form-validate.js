@@ -1,8 +1,8 @@
 import {sendData} from './api.js';
 import {mapReset} from './map.js';
-import {showSuccessAlert, showErrorAlert} from './utils.js';
+import {sliderReset} from './nouislider.js';
 import {resetUpload} from './pictures-upload.js';
-import {sliderReset} from './map.js';
+import {onSuccessAlert, onErrorAlert} from './utils.js';
 
 const filtersContainer = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
@@ -15,14 +15,6 @@ const capacityFieldElement = adForm.querySelector('#capacity');
 const submitButton = document.querySelector('.ad-form__submit');
 const resetButton = document.querySelector('.ad-form__reset');
 
-const pristine = new Pristine(adForm, {
-  classTo: 'ad-form__element',
-  errorTextParent: 'ad-form__element',
-  errorTextTag: 'span',
-  errorTextClass: 'ad-form__element--error',
-}, true);
-
-//Зависимость поля «Цена за ночь» от поля «Тип жилья»:
 const minPrice = {
   'bungalow' : 0,
   'flat' : 1000,
@@ -31,7 +23,13 @@ const minPrice = {
   'palace' : 10000,
 };
 
-//Валидация priceFieldElement
+const pristine = new Pristine(adForm, {
+  classTo: 'ad-form__element',
+  errorTextParent: 'ad-form__element',
+  errorTextTag: 'span',
+  errorTextClass: 'ad-form__element--error',
+}, true);
+
 const validatePrice = () => {
   const priceValue = minPrice[typeFieldElement.value]; //Берем значение из minPrice
   return priceFieldElement.value >= priceValue;
@@ -39,7 +37,6 @@ const validatePrice = () => {
 
 const getPriceErrorMessage = () => `Введите цену больше ${minPrice[typeFieldElement.value]}`;
 
-//Валидация roomFieldElement
 const validateRoom = () => {
   const currentRoomValue = parseInt(roomFieldElement.value, 10); //Выбранное количество комнат
   const currentCapacityValue = parseInt(capacityFieldElement.value, 10); //Выбранное количество гостей
@@ -58,7 +55,6 @@ const getRoomErrorMessage = () => {
   return `Не более ${roomFieldElement.value} гостей`;
 };
 
-//События при "change"
 const onChange = (evt) => {
   if (evt.target === typeFieldElement) {
     priceFieldElement.setAttribute('min', minPrice[typeFieldElement.value]);
@@ -79,16 +75,15 @@ adForm.addEventListener('change', onChange);
 pristine.addValidator(priceFieldElement, validatePrice, getPriceErrorMessage);
 pristine.addValidator(roomFieldElement, validateRoom, getRoomErrorMessage);
 
-//Reset form
-const resetForm = () => {
+const onResetForm = () => {
   adForm.reset();
   pristine.reset();
   filtersContainer.reset();
 };
 
 const onSubmitSuccess = () => {
-  showSuccessAlert();
-  resetForm();
+  onSuccessAlert();
+  onResetForm();
   resetUpload();
   sliderReset();
   mapReset();
@@ -96,7 +91,7 @@ const onSubmitSuccess = () => {
 };
 
 const onSubmitError = () => {
-  showErrorAlert();
+  onErrorAlert();
   submitButton.disabled = false;
 };
 
@@ -113,9 +108,7 @@ adForm.addEventListener('submit', (evt) => {
 
 resetButton.addEventListener('click', () => {
   pristine.reset();
-  resetForm();
+  onResetForm();
   resetUpload();
   mapReset();
 });
-
-export {resetForm};

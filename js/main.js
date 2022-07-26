@@ -1,16 +1,17 @@
-import './form-validate.js';
-import './map.js';
 import './api.js';
+import './map.js';
+import './nouislider.js';
 import './map-filters.js';
+import './form-validate.js';
 import './pictures-upload.js';
 import {getData} from './api.js';
 import {initMap} from './map.js';
-import {makeFormDisabled} from './form-toggle.js';
 import {setAdverts} from './data.js';
-
-makeFormDisabled();
+import {makeFormDisabled} from './form-toggle.js';
 
 const SIMILAR_OFFERS_COUNT = 10;
+
+makeFormDisabled();
 
 const onSuccessLoadData = (offers) => {
   setAdverts(offers);

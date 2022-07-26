@@ -1,7 +1,7 @@
-import {renderMarkersWithDebounce} from './map.js';
 import {state} from './data.js';
-const filtersContainer = document.querySelector('.map__filters');
+import {renderMarkersWithDebounce} from './map.js';
 
+const filtersContainer = document.querySelector('.map__filters');
 const typeFilterElement = filtersContainer.querySelector('#housing-type');
 const priceFilterElement = filtersContainer.querySelector('#housing-price');
 const roomsFilterElement = filtersContainer.querySelector('#housing-rooms');
@@ -9,7 +9,6 @@ const guestsFilterElement = filtersContainer.querySelector('#housing-guests');
 const housingFeaturesElement = filtersContainer.querySelector('#housing-features');
 
 const DEFAULT_VALUE = 'any';
-
 const LOW_PRICE_VALUE = 10000;
 const HIGH_PRICE_VALUE = 50000;
 

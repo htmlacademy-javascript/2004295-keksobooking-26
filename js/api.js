@@ -1,4 +1,4 @@
-import {showErrorAlert} from './utils.js';
+import {onErrorAlert} from './utils.js';
 
 const getData = (onSuccess, onError) => {
   fetch('https://26.javascript.pages.academy/keksobooking/data')
@@ -12,7 +12,7 @@ const getData = (onSuccess, onError) => {
     .then((offers) => {
       onSuccess(offers);
     })
-    .catch(() => showErrorAlert('Не удалось загрузить данные'));
+    .catch(() => onErrorAlert('Не удалось загрузить данные'));
 };
 
 const sendData = (body, onSuccess, onError) => {
@@ -30,7 +30,7 @@ const sendData = (body, onSuccess, onError) => {
         onError();
       }
     })
-    .catch(showErrorAlert);
+    .catch(onErrorAlert);
 };
 
 export {getData, sendData};

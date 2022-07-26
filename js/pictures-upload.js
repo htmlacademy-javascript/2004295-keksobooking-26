@@ -1,10 +1,10 @@
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
 const avatarFileChooser = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('#avatar__preview');
-const DEFAULT_AVATAR_PREVIEW = avatarPreview.src;
 const residenceFileChooser = document.querySelector('#images');
 const residencePreview = document.querySelector('.ad-form__photo');
+
+const DEFAULT_AVATAR_PREVIEW = avatarPreview.src;
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const getPreviewUploadedFile = (fileChooser, preview) => {
   fileChooser.addEventListener('change', () => {

@@ -1,7 +1,7 @@
-import {createCustomCard} from './card-generate.js';
-import {makeFormActive} from './form-toggle.js';
 import {state} from './data.js';
 import {debounce} from './utils.js';
+import {makeFormActive} from './form-toggle.js';
+import {createCustomCard} from './card-generate.js';
 
 const DEFAULT_LOCATION = {
   lat: 35.7000,
@@ -79,48 +79,11 @@ const initMap = (offers) => {
   makeFormActive();
 };
 
-//* Реализация noUIslider
-
-const sliderElement = document.querySelector('.ad-form__slider');
-const valueElement = document.querySelector('#price');
-const DEFAULT_PRICE_VALUE = 1000;
-
-valueElement.value = DEFAULT_PRICE_VALUE;
-
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 100000,
-  },
-  start: DEFAULT_PRICE_VALUE,
-  step: 1,
-  connect: 'lower',
-  format: {
-    to:
-    (value) => Number.isInteger(value) ? value : value.toFixed(0),
-    from:
-    (value) => parseFloat(value),
-  },
-});
-
-sliderElement.noUiSlider.on('update', () => {
-  valueElement.value = sliderElement.noUiSlider.get();
-});
-
-const sliderReset = () => {
-  sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
-};
-
 //Map reset
 const mapReset = () => {
   mainMarker.setLatLng(DEFAULT_LOCATION);
-
-  map.setView(
-    DEFAULT_LOCATION
-    , 12);
-
-  sliderReset();
+  map.setView(DEFAULT_LOCATION, 12);
   renderMarkersWithDebounce(state.adverts.slice(0, 10));
 };
 
-export {createStandartMarker, mapReset, renderMarkersWithDebounce, initMap, sliderReset};
+export {createStandartMarker, mapReset, renderMarkersWithDebounce, initMap};
