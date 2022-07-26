@@ -1,50 +1,27 @@
 /*
-
 const filtersContainer = document.querySelector('.map__filters');
 
-const typeFilter = filtersContainer.querySelector('#housing-type');
-const priceFilter = filtersContainer.querySelector('#housing-price');
-const roomsFilter = filtersContainer.querySelector('#housing-rooms');
-const guestsFilter = filtersContainer.querySelector('#housing-guests');
-const featuresFilter = filtersContainer.querySelector('#housing-features');
+const typeFilterElement = filtersContainer.querySelector('#housing-type');
+const priceFilterElement = filtersContainer.querySelector('#housing-price');
+const roomsFilterElement = filtersContainer.querySelector('#housing-rooms');
+const guestsFilterElement = filtersContainer.querySelector('#housing-guests');
 
 const DEFAULT_VALUE = 'any';
 
-const PriceRange = {
-  LOW: {
-    from: 0,
-    to: 10000,
-  },
-  MIDDLE: {
-    from: 10000,
-    to: 50000,
-  },
-  HIGH: {
-    from: 50000,
-    to: 100000,
-  },
-  ANY: {
-    from: 0,
-    to: 100000,
-  },
+const lowPriceValue = priceFilterElement.value === 'low';
+const highPriceValue = priceFilterElement.value === 'high';
+const middlePriceValue = priceFilterElement.value === 'middle';
+
+//Узнаем значение выбранного feature в фильтре
+const getTypeFilterValue = (card) => card.offer.type === typeFilterElement.value || typeFilterElement.value === DEFAULT_VALUE;
+const getPriceFilterValue = (card) => card.offer.price === priceFilterElement.value || priceFilterElement.value === DEFAULT_VALUE;
+const getRoomsFilterValue = (card) => card.offer.rooms === roomsFilterElement.value || roomsFilterElement.value === DEFAULT_VALUE;
+const getGuestsFilterValue = (card) => card.offer.quests === guestsFilterElement.value || guestsFilterElement.value === DEFAULT_VALUE;
+
+const getCheckedFeatures = () => {
+  const checkedFeatures = document.querySelectorAll('[name="features"]:checked');
+  const checkedFeaturesArray = Array.from(checkedFeatures).map((item) => item.value);
+
+  return checkedFeaturesArray;
 };
-
-//Проверяем значение каждого feature
-const getTypeFilter = (card) => card.offer.type === typeFilter.value || typeFilter.value === DEFAULT_VALUE;
-const getPriceFilter = (card) => card.offer.price === priceFilter.value || priceFilter.value === DEFAULT_VALUE;
-const getRoomsFilter = (card) => card.offer.rooms === roomsFilter.value || roomsFilter.value === DEFAULT_VALUE;
-const getGuestsFilter = (card) => card.offer.quests === guestsFilter.value || guestsFilter.value === DEFAULT_VALUE;
-
-const getFeaturesFilter = (card) => {
-  const filteredFeatures = [];
-  const checkedFeatures = featuresFilter.querySelectorAll('input:checked');
-
-  checkedFeatures.forEach((item) => filteredFeatures.push(item.value));
-
-  if (card.offer.features){
-    return filteredFeatures.every((feature) => card.offer.features.includes(feature));
-  }
-  return false;
-};
-
 */

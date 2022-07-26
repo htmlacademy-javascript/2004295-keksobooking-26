@@ -85,7 +85,7 @@ const showErrorAlert = (errorText = 'Не удалось отправить да
 };
 
 //Debounce
-const debounce = (callback, timeoutDelay) => {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
