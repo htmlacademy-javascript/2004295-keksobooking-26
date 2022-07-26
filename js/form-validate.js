@@ -91,6 +91,7 @@ const onSubmitSuccess = () => {
   resetForm();
   resetUpload();
   sliderReset();
+  mapReset();
   submitButton.disabled = false;
 };
 
