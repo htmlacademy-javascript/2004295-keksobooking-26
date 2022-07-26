@@ -1,3 +1,6 @@
+const templateFragment = document.querySelector('#card').content;
+const template = templateFragment.querySelector('.popup');
+
 const translateType = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -5,8 +8,6 @@ const translateType = {
   palace: 'Дворец',
   hotel: 'Отель',
 };
-const templateFragment = document.querySelector('#card').content;
-const template = templateFragment.querySelector('.popup');
 
 const createCustomCard = (card) => {
   const element = template.cloneNode(true);
@@ -25,10 +26,10 @@ const createCustomCard = (card) => {
 
   // offer.features
   const featuresArray = card.offer.features;
+
   if (featuresArray) {
-    const modifiers = featuresArray.map((anyFeature) => `popup__feature--${anyFeature}`);
     featuresListElement.forEach((feature) => {
-      if (!modifiers.includes(card)) {
+      if (!featuresArray.includes(feature.dataset.type)) {
         feature.remove();
       }
     });

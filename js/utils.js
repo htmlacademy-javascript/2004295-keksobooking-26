@@ -1,24 +1,11 @@
-// Случайное ЦЕЛОЕ положительные число из переданного диапазона включительно
-const getRandomPositiveInteger = (min, max) => {
-  if (max <= min) {
-    throw new Error('Задан неверный диапазон. Максимальное значение должно быть больше минимального.');
-  }
-  if (min < 0) {
-    throw new Error('Задан неверный диапазон. Диапазон может быть только положительный, включая ноль.');
-  }
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 const submitFieldElement = document.querySelector('.ad-form__element--submit');
-
-//Success alert
 const templateSuccessFragment = document.querySelector('#success').content;
-const templateSuccess = templateSuccessFragment.querySelector('.success');
+const templateSuccessElement = templateSuccessFragment.querySelector('.success');
+const templateErrorFragment = document.querySelector('#error').content;
+const templateErrorElement = templateErrorFragment.querySelector('.error');
 
-const showSuccessAlert = () => {
-  const successContainer = templateSuccess.cloneNode(true);
+const onSuccessAlert = () => {
+  const successContainer = templateSuccessElement.cloneNode(true);
   const successElement = successContainer.querySelector('.success__message');
 
   successElement.style.color = 'green';
@@ -29,29 +16,27 @@ const showSuccessAlert = () => {
 
   submitFieldElement.append(successElement);
 
-  const escAlertClose = (evt) => {
+  const onEscAlertClose = (evt) => {
     if (evt.key === 'Escape') {
       successElement.remove();
-      document.removeEventListener('keydown', escAlertClose);
+      document.removeEventListener('keydown', onEscAlertClose);
     }
   };
 
-  document.addEventListener('keydown', escAlertClose);
+  document.addEventListener('keydown', onEscAlertClose);
 
-  const clickAlertClose = () => {
-    document.removeEventListener('click', clickAlertClose);
+  const onClickAlertClose = () => {
+    document.removeEventListener('click', onClickAlertClose);
     successElement.remove();
   };
 
-  document.addEventListener('click', clickAlertClose);
+  document.addEventListener('click', onClickAlertClose);
 };
 
 //Error alert
-const templateErrorFragment = document.querySelector('#error').content;
-const templateError = templateErrorFragment.querySelector('.error');
 
-const showErrorAlert = (errorText = 'Не удалось отправить данные') => {
-  const errorContainer = templateError.cloneNode(true);
+const onErrorAlert = (errorText = 'Не удалось отправить данные') => {
+  const errorContainer = templateErrorElement.cloneNode(true);
   const errorElement = errorContainer.querySelector('.error__message');
   const errorButton = errorContainer.querySelector('.error__button');
 
@@ -67,21 +52,30 @@ const showErrorAlert = (errorText = 'Не удалось отправить да
   submitFieldElement.append(errorElement);
   submitFieldElement.append(errorButton);
 
-  const escAlertClose = (evt) => {
+  const onEscAlertClose = (evt) => {
     if (evt.key === 'Escape') {
       errorElement.remove();
-      document.removeEventListener('keydown', escAlertClose);
+      document.removeEventListener('keydown', onEscAlertClose);
     }
   };
 
-  document.addEventListener('keydown', escAlertClose);
+  document.addEventListener('keydown', onEscAlertClose);
 
-  const clickAlertClose = () => {
-    document.removeEventListener('click', clickAlertClose);
+  const onClickAlertClose = () => {
+    document.removeEventListener('click', onClickAlertClose);
     errorElement.remove();
   };
 
-  document.addEventListener('click', clickAlertClose);
+  document.addEventListener('click', onClickAlertClose);
 };
 
-export {getRandomPositiveInteger, showSuccessAlert, showErrorAlert};
+//Debounce
+const debounce = (cb, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => cb.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {onSuccessAlert, onErrorAlert, debounce};

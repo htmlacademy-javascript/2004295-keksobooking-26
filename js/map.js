@@ -1,9 +1,8 @@
-import {makeFormActive, makeFormDisabled} from './form-toggle.js';
+import {state} from './data.js';
+import {debounce} from './utils.js';
+import {makeFormActive} from './form-toggle.js';
 import {createCustomCard} from './card-generate.js';
 
-makeFormDisabled();
-
-const resetButton = document.querySelector('.ad-form__reset');
 const DEFAULT_LOCATION = {
   lat: 35.7000,
   lng: 139.7000,
@@ -11,7 +10,6 @@ const DEFAULT_LOCATION = {
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    makeFormActive();
   })
   .setView(
     DEFAULT_LOCATION
@@ -69,45 +67,23 @@ const createStandartMarker = ((item) => {
     .bindPopup(createCustomCard(item));
 });
 
-//* Реализация noUIslider
+const renderMarkers = (offers) => {
+  standartMarkerGroup.clearLayers();
+  offers.forEach((offer) => createStandartMarker(offer));
+};
 
-const sliderElement = document.querySelector('.ad-form__slider');
-const valueElement = document.querySelector('#price');
-const DEFAULT_PRICE_VALUE = 1000;
+const renderMarkersWithDebounce = (offers) => debounce(() => renderMarkers(offers))();
 
-valueElement.value = DEFAULT_PRICE_VALUE;
-
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 100000,
-  },
-  start: DEFAULT_PRICE_VALUE,
-  step: 1,
-  connect: 'lower',
-  format: {
-    to:
-    (value) => Number.isInteger(value) ? value : value.toFixed(0),
-    from:
-    (value) => parseFloat(value),
-  },
-});
-
-sliderElement.noUiSlider.on('update', () => {
-  valueElement.value = sliderElement.noUiSlider.get();
-});
+const initMap = (offers) => {
+  renderMarkers(offers);
+  makeFormActive();
+};
 
 //Map reset
 const mapReset = () => {
   mainMarker.setLatLng(DEFAULT_LOCATION);
-
-  map.setView(
-    DEFAULT_LOCATION
-    , 12);
-
-  sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
+  map.setView(DEFAULT_LOCATION, 12);
+  renderMarkersWithDebounce(state.adverts.slice(0, 10));
 };
 
-resetButton.addEventListener('click', () => mapReset());
-
-export {createStandartMarker, mapReset};
+export {createStandartMarker, mapReset, renderMarkersWithDebounce, initMap};
