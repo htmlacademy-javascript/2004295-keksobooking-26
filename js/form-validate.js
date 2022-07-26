@@ -2,6 +2,7 @@ import {sendData} from './api.js';
 import {mapReset} from './map.js';
 import {showSuccessAlert, showErrorAlert} from './utils.js';
 import {resetUpload} from './pictures-upload.js';
+import {sliderReset} from './map.js';
 
 const filtersContainer = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
@@ -88,6 +89,8 @@ const resetForm = () => {
 const onSubmitSuccess = () => {
   showSuccessAlert();
   resetForm();
+  resetUpload();
+  sliderReset();
   submitButton.disabled = false;
 };
 

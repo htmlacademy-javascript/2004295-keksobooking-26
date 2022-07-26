@@ -107,6 +107,10 @@ sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
 });
 
+const sliderReset = () => {
+  sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
+};
+
 //Map reset
 const mapReset = () => {
   mainMarker.setLatLng(DEFAULT_LOCATION);
@@ -115,8 +119,8 @@ const mapReset = () => {
     DEFAULT_LOCATION
     , 12);
 
-  sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
+  sliderReset();
   renderMarkersWithDebounce(state.adverts.slice(0, 10));
 };
 
-export {createStandartMarker, mapReset, renderMarkersWithDebounce, initMap};
+export {createStandartMarker, mapReset, renderMarkersWithDebounce, initMap, sliderReset};
