@@ -3,6 +3,7 @@ import {mapReset} from './map.js';
 import {showSuccessAlert, showErrorAlert} from './utils.js';
 import {resetUpload} from './pictures-upload.js';
 
+const filtersContainer = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
 const typeFieldElement = adForm.querySelector('#type');
 const priceFieldElement = adForm.querySelector('#price');
@@ -11,6 +12,7 @@ const timeoutElement = adForm.querySelector('#timeout');
 const roomFieldElement = adForm.querySelector('#room_number');
 const capacityFieldElement = adForm.querySelector('#capacity');
 const submitButton = document.querySelector('.ad-form__submit');
+const resetButton = document.querySelector('.ad-form__reset');
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
@@ -80,7 +82,7 @@ pristine.addValidator(roomFieldElement, validateRoom, getRoomErrorMessage);
 const resetForm = () => {
   adForm.reset();
   pristine.reset();
-  mapReset();
+  filtersContainer.reset();
 };
 
 const onSubmitSuccess = () => {
@@ -105,10 +107,11 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-adForm.addEventListener('reset', () => {
+resetButton.addEventListener('click', () => {
   pristine.reset();
   resetForm();
   resetUpload();
+  mapReset();
 });
 
 export {resetForm};

@@ -1,7 +1,8 @@
 import {createCustomCard} from './card-generate.js';
 import {makeFormActive} from './form-toggle.js';
+import { state } from './data.js';
+import { debounce } from './utils.js';
 
-const resetButton = document.querySelector('.ad-form__reset');
 const DEFAULT_LOCATION = {
   lat: 35.7000,
   lng: 139.7000,
@@ -64,8 +65,19 @@ const createStandartMarker = ((item) => {
   )
     .addTo(standartMarkerGroup)
     .bindPopup(createCustomCard(item));
-  makeFormActive();
 });
+
+const renderMarkers = (offers) => {
+  standartMarkerGroup.clearLayers();
+  offers.forEach((offer) => createStandartMarker(offer));
+};
+
+const renderMarkersWithDebounce = (offers) => debounce(() => renderMarkers(offers))();
+
+const initMap = (offers) => {
+  renderMarkers(offers);
+  makeFormActive();
+};
 
 //* Реализация noUIslider
 
@@ -104,8 +116,7 @@ const mapReset = () => {
     , 12);
 
   sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
+  renderMarkersWithDebounce(state.adverts.slice(0, 10));
 };
 
-resetButton.addEventListener('click', () => mapReset());
-
-export {createStandartMarker, mapReset};
+export {createStandartMarker, mapReset, renderMarkersWithDebounce, initMap};

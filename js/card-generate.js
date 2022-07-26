@@ -25,10 +25,10 @@ const createCustomCard = (card) => {
 
   // offer.features
   const featuresArray = card.offer.features;
+
   if (featuresArray) {
-    const modifiers = featuresArray.map((anyFeature) => `popup__feature--${anyFeature}`);
     featuresListElement.forEach((feature) => {
-      if (!modifiers.includes(card)) {
+      if (!featuresArray.includes(feature.dataset.type)) {
         feature.remove();
       }
     });

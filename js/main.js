@@ -4,20 +4,19 @@ import './api.js';
 import './map-filters.js';
 import './pictures-upload.js';
 import {getData} from './api.js';
-import {createStandartMarker} from './map.js';
-// import {showErrorAlert, /*getRandomPositiveInteger*/} from './utils.js';
+import {initMap} from './map.js';
 import {makeFormDisabled} from './form-toggle.js';
-import {getAdvertFilters} from './map-filters.js';
+// import {getAdvertFilters} from './map-filters.js';
+import { setAdverts } from './data.js';
 
 makeFormDisabled();
 
-// const SIMILAR_OFFERS_COUNT = getRandomPositiveInteger(1, 10);
-// .slice(0, SIMILAR_OFFERS_COUNT)
+const SIMILAR_OFFERS_COUNT = 10;
 
-const renderOffers = (offers) => {offers
-  .filter(getAdvertFilters)
-  .forEach((offer) => createStandartMarker(offer));
+const onSuccessLoadData = (offers) => {
+  setAdverts(offers);
+  initMap(offers.slice(0, SIMILAR_OFFERS_COUNT));
 };
 
-getData(renderOffers);
+getData(onSuccessLoadData);
 // getData(renderOffers, () => showErrorAlert('Не удалось загрузить данные'));
