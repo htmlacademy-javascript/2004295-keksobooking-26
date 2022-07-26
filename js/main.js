@@ -6,8 +6,7 @@ import './pictures-upload.js';
 import {getData} from './api.js';
 import {initMap} from './map.js';
 import {makeFormDisabled} from './form-toggle.js';
-// import {getAdvertFilters} from './map-filters.js';
-import { setAdverts } from './data.js';
+import {setAdverts} from './data.js';
 
 makeFormDisabled();
 
@@ -19,4 +18,3 @@ const onSuccessLoadData = (offers) => {
 };
 
 getData(onSuccessLoadData);
-// getData(renderOffers, () => showErrorAlert('Не удалось загрузить данные'));

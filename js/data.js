@@ -6,4 +6,4 @@ const setAdverts = (adverts) => {
   state.adverts = adverts;
 };
 
-export { state, setAdverts };
+export {state, setAdverts};

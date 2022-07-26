@@ -1,5 +1,5 @@
-import { renderMarkersWithDebounce } from './map.js';
-import { state } from './data.js';
+import {renderMarkersWithDebounce} from './map.js';
+import {state} from './data.js';
 const filtersContainer = document.querySelector('.map__filters');
 
 const typeFilterElement = filtersContainer.querySelector('#housing-type');

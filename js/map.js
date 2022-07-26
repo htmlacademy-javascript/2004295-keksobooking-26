@@ -1,7 +1,7 @@
 import {createCustomCard} from './card-generate.js';
 import {makeFormActive} from './form-toggle.js';
-import { state } from './data.js';
-import { debounce } from './utils.js';
+import {state} from './data.js';
+import {debounce} from './utils.js';
 
 const DEFAULT_LOCATION = {
   lat: 35.7000,
