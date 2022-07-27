@@ -1,6 +1,3 @@
-const templateFragment = document.querySelector('#card').content;
-const template = templateFragment.querySelector('.popup');
-
 const translateType = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -8,6 +5,9 @@ const translateType = {
   palace: 'Дворец',
   hotel: 'Отель',
 };
+
+const templateFragment = document.querySelector('#card').content;
+const template = templateFragment.querySelector('.popup');
 
 const createCustomCard = (card) => {
   const element = template.cloneNode(true);

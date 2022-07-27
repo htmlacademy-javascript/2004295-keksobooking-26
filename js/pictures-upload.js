@@ -1,10 +1,10 @@
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 const avatarFileChooser = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('#avatar__preview');
 const residenceFileChooser = document.querySelector('#images');
 const residencePreview = document.querySelector('.ad-form__photo');
-
-const DEFAULT_AVATAR_PREVIEW = avatarPreview.src;
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const defaultAvatarPreview = avatarPreview.src;
 
 const getPreviewUploadedFile = (fileChooser, preview) => {
   fileChooser.addEventListener('change', () => {
@@ -39,7 +39,7 @@ residenceFileChooser.addEventListener('change', () => {
 });
 
 const resetUpload = () => {
-  avatarPreview.src = DEFAULT_AVATAR_PREVIEW;
+  avatarPreview.src = defaultAvatarPreview;
   residencePreview.innerHTML = '';
 };
 
