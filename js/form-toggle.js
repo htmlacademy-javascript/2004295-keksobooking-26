@@ -5,12 +5,12 @@ const interactiveFormElements = infoFormElement.querySelectorAll('fieldset,selec
 
 const DISABLED_FORM_CLASS = 'ad-form--disabled';
 
-const setDisabledAttribute = (arr) => {
-  arr.forEach((element) => element.setAttribute('disabled', true));
+const setDisabledAttribute = (elements) => {
+  elements.forEach((element) => element.setAttribute('disabled', true));
 };
 
-const removeDisabledAttribute = (arr) => {
-  arr.forEach((element) => element.removeAttribute('disabled'));
+const removeDisabledAttribute = (elements) => {
+  elements.forEach((element) => element.removeAttribute('disabled'));
 };
 
 const makeFormDisabled = () => {

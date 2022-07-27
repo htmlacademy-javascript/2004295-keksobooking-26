@@ -1,6 +1,6 @@
 // Реализация noUIslider
-const sliderElement = document.querySelector('.ad-form__slider');
 const valueElement = document.querySelector('#price');
+const sliderElement = document.querySelector('.ad-form__slider');
 
 const DEFAULT_PRICE_VALUE = 1000;
 

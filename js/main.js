@@ -11,11 +11,10 @@ import {makeFormDisabled} from './form-toggle.js';
 
 const SIMILAR_OFFERS_COUNT = 10;
 
-makeFormDisabled();
-
 const onSuccessLoadData = (offers) => {
   setAdverts(offers);
   initMap(offers.slice(0, SIMILAR_OFFERS_COUNT));
 };
 
+makeFormDisabled();
 getData(onSuccessLoadData);
