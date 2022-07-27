@@ -7,13 +7,9 @@ const DEFAULT_LOCATION = {
   lat: 35.7000,
   lng: 139.7000,
 };
+const DEFAULT_ZOOM = 12;
 
-const map = L.map('map-canvas')
-  .on('load', () => {
-  })
-  .setView(
-    DEFAULT_LOCATION
-    , 12);
+const map = L.map('map-canvas').setView(DEFAULT_LOCATION, DEFAULT_ZOOM);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -82,7 +78,7 @@ const initMap = (offers) => {
 //Map reset
 const mapReset = () => {
   mainMarker.setLatLng(DEFAULT_LOCATION);
-  map.setView(DEFAULT_LOCATION, 12);
+  map.setView(DEFAULT_LOCATION, DEFAULT_ZOOM);
   renderMarkersWithDebounce(state.adverts.slice(0, 10));
 };
 
