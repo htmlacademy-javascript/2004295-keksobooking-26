@@ -4,6 +4,9 @@ import {sliderReset} from './nouislider.js';
 import {resetUpload} from './pictures-upload.js';
 import {onSuccessAlert, onErrorAlert} from './utils.js';
 
+const MIN_ROOMS_PRICE_VALUE = '1';
+const MAX_ROOMS_PRICE_VALUE = '100';
+
 const minPrice = {
   'bungalow' : 0,
   'flat' : 1000,
@@ -11,9 +14,6 @@ const minPrice = {
   'house' : 5000,
   'palace' : 10000,
 };
-
-const minRoomsPriceValue = '1';
-const maxRoomsPriceValue = '100';
 
 const filtersContainer = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
@@ -43,16 +43,16 @@ const getPriceErrorMessage = () => `Введите цену больше ${minPr
 const validateRoom = () => {
   const currentRoomValue = Number(roomFieldElement.value); //Выбранное количество комнат
   const currentCapacityValue = Number(capacityFieldElement.value); //Выбранное количество гостей
-  if (currentCapacityValue === 0 || currentRoomValue === Number(maxRoomsPriceValue)) {
-    return currentCapacityValue === 0 && currentRoomValue === Number(maxRoomsPriceValue);
+  if (currentCapacityValue === 0 || currentRoomValue === Number(MAX_ROOMS_PRICE_VALUE)) {
+    return currentCapacityValue === 0 && currentRoomValue === Number(MAX_ROOMS_PRICE_VALUE);
   }
   return currentRoomValue >= currentCapacityValue;
 };
 
 const getRoomErrorMessage = () => {
-  if (Number(roomFieldElement.value) === Number(minRoomsPriceValue)) {
+  if (Number(roomFieldElement.value) === Number(MIN_ROOMS_PRICE_VALUE)) {
     return 'Не более 1 гостя';
-  } else if (Number(roomFieldElement.value) === Number(maxRoomsPriceValue)) {
+  } else if (Number(roomFieldElement.value) === Number(MAX_ROOMS_PRICE_VALUE)) {
     return 'Не для гостей';
   }
   return `Не более ${roomFieldElement.value} гостей`;

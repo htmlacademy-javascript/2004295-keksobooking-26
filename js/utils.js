@@ -7,13 +7,13 @@ const templateErrorFragment = document.querySelector('#error').content;
 const templateErrorElement = templateErrorFragment.querySelector('.error');
 
 const onSuccessAlert = () => {
-  const successContainer = templateSuccessElement.cloneNode(true);
+  const successTemplate = templateSuccessElement.cloneNode(true);
 
-  submitFieldElement.append(successContainer);
+  submitFieldElement.append(successTemplate);
 
   const onEscAlertClose = (evt) => {
     if (evt.key === 'Escape') {
-      successContainer.remove();
+      successTemplate.remove();
       document.removeEventListener('keydown', onEscAlertClose);
     }
   };
@@ -22,7 +22,7 @@ const onSuccessAlert = () => {
 
   const onClickAlertClose = () => {
     document.removeEventListener('click', onClickAlertClose);
-    successContainer.remove();
+    successTemplate.remove();
   };
 
   document.addEventListener('click', onClickAlertClose);
@@ -31,19 +31,19 @@ const onSuccessAlert = () => {
 //Error alert
 
 const onErrorAlert = (errorText = 'Не удалось отправить данные') => {
-  const errorContainer = templateErrorElement.cloneNode(true);
-  const errorElement = errorContainer.querySelector('.error__message');
-  const errorButton = errorContainer.querySelector('.error__button');
+  const errorTemplate = templateErrorElement.cloneNode(true);
+  const errorElement = errorTemplate.querySelector('.error__message');
+  const errorButton = errorTemplate.querySelector('.error__button');
 
   errorElement.textContent = errorText;
 
   submitFieldElement.innerHTML = '';
-  submitFieldElement.append(errorContainer);
+  submitFieldElement.append(errorTemplate);
   submitFieldElement.append(errorButton);
 
   const onEscAlertClose = (evt) => {
     if (evt.key === 'Escape') {
-      errorContainer.remove();
+      errorTemplate.remove();
       document.removeEventListener('keydown', onEscAlertClose);
     }
   };
@@ -52,7 +52,7 @@ const onErrorAlert = (errorText = 'Не удалось отправить дан
 
   const onClickAlertClose = () => {
     document.removeEventListener('click', onClickAlertClose);
-    errorContainer.remove();
+    errorTemplate.remove();
   };
 
   document.addEventListener('click', onClickAlertClose);
