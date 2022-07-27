@@ -1,9 +1,9 @@
+const DISABLED_FORM_CLASS = 'ad-form--disabled';
+
 const infoFormElement = document.querySelector('.ad-form');
 const filterFormElement = document.querySelector('.map__filters');
 const interactiveFilterElements = filterFormElement.querySelectorAll('fieldset,select,input');
 const interactiveFormElements = infoFormElement.querySelectorAll('fieldset,select,input,textarea,button');
-
-const DISABLED_FORM_CLASS = 'ad-form--disabled';
 
 const setDisabledAttribute = (elements) => {
   elements.forEach((element) => element.setAttribute('disabled', true));

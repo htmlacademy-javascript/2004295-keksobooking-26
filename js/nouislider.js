@@ -1,18 +1,22 @@
-// Реализация noUIslider
+const SliderPriceValue = {
+  MIN: 0,
+  MAX: 100000,
+  DEFAULT: 1000,
+  STEP: 1,
+};
+
 const valueElement = document.querySelector('#price');
 const sliderElement = document.querySelector('.ad-form__slider');
 
-const DEFAULT_PRICE_VALUE = 1000;
-
-valueElement.value = DEFAULT_PRICE_VALUE;
+valueElement.value = SliderPriceValue.DEFAULT;
 
 noUiSlider.create(sliderElement, {
   range: {
-    min: 0,
-    max: 100000,
+    min: SliderPriceValue.MIN,
+    max: SliderPriceValue.MAX,
   },
-  start: DEFAULT_PRICE_VALUE,
-  step: 1,
+  start: SliderPriceValue.DEFAULT,
+  step: SliderPriceValue.STEP,
   connect: 'lower',
   format: {
     to:
@@ -27,7 +31,7 @@ sliderElement.noUiSlider.on('update', () => {
 });
 
 const sliderReset = () => {
-  sliderElement.noUiSlider.set(DEFAULT_PRICE_VALUE);
+  sliderElement.noUiSlider.set(SliderPriceValue.DEFAULT);
 };
 
 export {sliderReset};
