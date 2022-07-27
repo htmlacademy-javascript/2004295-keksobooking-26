@@ -1,3 +1,5 @@
+const DEFAULT_TIMEOUT_DELAY = '500';
+
 const submitFieldElement = document.querySelector('.ad-form__element--submit');
 const templateSuccessFragment = document.querySelector('#success').content;
 const templateSuccessElement = templateSuccessFragment.querySelector('.success');
@@ -5,20 +7,13 @@ const templateErrorFragment = document.querySelector('#error').content;
 const templateErrorElement = templateErrorFragment.querySelector('.error');
 
 const onSuccessAlert = () => {
-  const successContainer = templateSuccessElement.cloneNode(true);
-  const successElement = successContainer.querySelector('.success__message');
+  const successTemplate = templateSuccessElement.cloneNode(true);
 
-  successElement.style.color = 'green';
-  successElement.style.fontSize = '18px';
-  successElement.style.position = 'fixed';
-  successElement.style.top = '15%';
-  successElement.style.left = '4%';
-
-  submitFieldElement.append(successElement);
+  submitFieldElement.append(successTemplate);
 
   const onEscAlertClose = (evt) => {
     if (evt.key === 'Escape') {
-      successElement.remove();
+      successTemplate.remove();
       document.removeEventListener('keydown', onEscAlertClose);
     }
   };
@@ -27,7 +22,7 @@ const onSuccessAlert = () => {
 
   const onClickAlertClose = () => {
     document.removeEventListener('click', onClickAlertClose);
-    successElement.remove();
+    successTemplate.remove();
   };
 
   document.addEventListener('click', onClickAlertClose);
@@ -36,25 +31,19 @@ const onSuccessAlert = () => {
 //Error alert
 
 const onErrorAlert = (errorText = 'Не удалось отправить данные') => {
-  const errorContainer = templateErrorElement.cloneNode(true);
-  const errorElement = errorContainer.querySelector('.error__message');
-  const errorButton = errorContainer.querySelector('.error__button');
+  const errorTemplate = templateErrorElement.cloneNode(true);
+  const errorElement = errorTemplate.querySelector('.error__message');
+  const errorButton = errorTemplate.querySelector('.error__button');
 
   errorElement.textContent = errorText;
 
-  errorElement.style.color = 'red';
-  errorElement.style.fontSize = '18px';
-  errorElement.style.position = 'fixed';
-  errorElement.style.top = '15%';
-  errorElement.style.left = '2%';
-
   submitFieldElement.innerHTML = '';
-  submitFieldElement.append(errorElement);
+  submitFieldElement.append(errorTemplate);
   submitFieldElement.append(errorButton);
 
   const onEscAlertClose = (evt) => {
     if (evt.key === 'Escape') {
-      errorElement.remove();
+      errorTemplate.remove();
       document.removeEventListener('keydown', onEscAlertClose);
     }
   };
@@ -63,14 +52,14 @@ const onErrorAlert = (errorText = 'Не удалось отправить дан
 
   const onClickAlertClose = () => {
     document.removeEventListener('click', onClickAlertClose);
-    errorElement.remove();
+    errorTemplate.remove();
   };
 
   document.addEventListener('click', onClickAlertClose);
 };
 
 //Debounce
-const debounce = (cb, timeoutDelay = 500) => {
+const debounce = (cb, timeoutDelay = DEFAULT_TIMEOUT_DELAY) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);

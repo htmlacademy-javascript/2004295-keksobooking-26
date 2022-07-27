@@ -4,6 +4,17 @@ import {sliderReset} from './nouislider.js';
 import {resetUpload} from './pictures-upload.js';
 import {onSuccessAlert, onErrorAlert} from './utils.js';
 
+const MIN_ROOMS_PRICE_VALUE = '1';
+const MAX_ROOMS_PRICE_VALUE = '100';
+
+const minPrice = {
+  'bungalow' : 0,
+  'flat' : 1000,
+  'hotel' : 3000,
+  'house' : 5000,
+  'palace' : 10000,
+};
+
 const filtersContainer = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
 const typeFieldElement = adForm.querySelector('#type');
@@ -14,14 +25,6 @@ const roomFieldElement = adForm.querySelector('#room_number');
 const capacityFieldElement = adForm.querySelector('#capacity');
 const submitButton = document.querySelector('.ad-form__submit');
 const resetButton = document.querySelector('.ad-form__reset');
-
-const minPrice = {
-  'bungalow' : 0,
-  'flat' : 1000,
-  'hotel' : 3000,
-  'house' : 5000,
-  'palace' : 10000,
-};
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
@@ -38,18 +41,18 @@ const validatePrice = () => {
 const getPriceErrorMessage = () => `Введите цену больше ${minPrice[typeFieldElement.value]}`;
 
 const validateRoom = () => {
-  const currentRoomValue = parseInt(roomFieldElement.value, 10); //Выбранное количество комнат
-  const currentCapacityValue = parseInt(capacityFieldElement.value, 10); //Выбранное количество гостей
-  if (currentCapacityValue === 0 || currentRoomValue === 100) {
-    return currentCapacityValue === 0 && currentRoomValue === 100;
+  const currentRoomValue = Number(roomFieldElement.value); //Выбранное количество комнат
+  const currentCapacityValue = Number(capacityFieldElement.value); //Выбранное количество гостей
+  if (currentCapacityValue === 0 || currentRoomValue === Number(MAX_ROOMS_PRICE_VALUE)) {
+    return currentCapacityValue === 0 && currentRoomValue === Number(MAX_ROOMS_PRICE_VALUE);
   }
   return currentRoomValue >= currentCapacityValue;
 };
 
 const getRoomErrorMessage = () => {
-  if (parseInt(roomFieldElement.value, 10) === 1) {
+  if (Number(roomFieldElement.value) === Number(MIN_ROOMS_PRICE_VALUE)) {
     return 'Не более 1 гостя';
-  } else if (parseInt(roomFieldElement.value, 10) === 100) {
+  } else if (Number(roomFieldElement.value) === Number(MAX_ROOMS_PRICE_VALUE)) {
     return 'Не для гостей';
   }
   return `Не более ${roomFieldElement.value} гостей`;
