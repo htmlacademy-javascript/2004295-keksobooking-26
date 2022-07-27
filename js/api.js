@@ -1,7 +1,7 @@
 import {onErrorAlert} from './utils.js';
 
 const GET_DATA_URL = 'https://26.javascript.pages.academy/keksobooking/data';
-const SEND_DATA_URL = 'https://26.javascript.pages.academy/keksobooking';
+const SEND_DATA_URL = 'https://26.javascript.pages.academy/keksobooing';
 
 const getData = (onSuccess, onError) => {
   fetch(GET_DATA_URL)

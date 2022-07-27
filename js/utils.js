@@ -1,3 +1,5 @@
+const DEFAULT_TIMEOUT_DELAY = '500';
+
 const submitFieldElement = document.querySelector('.ad-form__element--submit');
 const templateSuccessFragment = document.querySelector('#success').content;
 const templateSuccessElement = templateSuccessFragment.querySelector('.success');
@@ -6,19 +8,12 @@ const templateErrorElement = templateErrorFragment.querySelector('.error');
 
 const onSuccessAlert = () => {
   const successContainer = templateSuccessElement.cloneNode(true);
-  const successElement = successContainer.querySelector('.success__message');
 
-  successElement.style.color = 'green';
-  successElement.style.fontSize = '18px';
-  successElement.style.position = 'fixed';
-  successElement.style.top = '15%';
-  successElement.style.left = '4%';
-
-  submitFieldElement.append(successElement);
+  submitFieldElement.append(successContainer);
 
   const onEscAlertClose = (evt) => {
     if (evt.key === 'Escape') {
-      successElement.remove();
+      successContainer.remove();
       document.removeEventListener('keydown', onEscAlertClose);
     }
   };
@@ -27,7 +22,7 @@ const onSuccessAlert = () => {
 
   const onClickAlertClose = () => {
     document.removeEventListener('click', onClickAlertClose);
-    successElement.remove();
+    successContainer.remove();
   };
 
   document.addEventListener('click', onClickAlertClose);
@@ -42,19 +37,13 @@ const onErrorAlert = (errorText = 'Не удалось отправить дан
 
   errorElement.textContent = errorText;
 
-  errorElement.style.color = 'red';
-  errorElement.style.fontSize = '18px';
-  errorElement.style.position = 'fixed';
-  errorElement.style.top = '15%';
-  errorElement.style.left = '2%';
-
   submitFieldElement.innerHTML = '';
-  submitFieldElement.append(errorElement);
+  submitFieldElement.append(errorContainer);
   submitFieldElement.append(errorButton);
 
   const onEscAlertClose = (evt) => {
     if (evt.key === 'Escape') {
-      errorElement.remove();
+      errorContainer.remove();
       document.removeEventListener('keydown', onEscAlertClose);
     }
   };
@@ -63,14 +52,14 @@ const onErrorAlert = (errorText = 'Не удалось отправить дан
 
   const onClickAlertClose = () => {
     document.removeEventListener('click', onClickAlertClose);
-    errorElement.remove();
+    errorContainer.remove();
   };
 
   document.addEventListener('click', onClickAlertClose);
 };
 
 //Debounce
-const debounce = (cb, timeoutDelay = 500) => {
+const debounce = (cb, timeoutDelay = DEFAULT_TIMEOUT_DELAY) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);

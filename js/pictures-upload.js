@@ -1,10 +1,11 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const DEFAULT_PREVIEW_SIZE = '70px';
 
-const avatarFileChooser = document.querySelector('#avatar');
-const avatarPreview = document.querySelector('#avatar__preview');
-const residenceFileChooser = document.querySelector('#images');
-const residencePreview = document.querySelector('.ad-form__photo');
-const defaultAvatarPreview = avatarPreview.src;
+const avatarFileChooserElement = document.querySelector('#avatar');
+const avatarPreviewElement = document.querySelector('#avatar__preview');
+const residenceFileChooserElement = document.querySelector('#images');
+const residencePreviewElement = document.querySelector('.ad-form__photo');
+const defaultAvatarPreview = avatarPreviewElement.src;
 
 const getPreviewUploadedFile = (fileChooser, preview) => {
   fileChooser.addEventListener('change', () => {
@@ -19,15 +20,15 @@ const getPreviewUploadedFile = (fileChooser, preview) => {
   });
 };
 
-getPreviewUploadedFile(avatarFileChooser, avatarPreview);
+getPreviewUploadedFile(avatarFileChooserElement, avatarPreviewElement);
 
-residenceFileChooser.addEventListener('change', () => {
-  residencePreview.innerHTML = '';
+residenceFileChooserElement.addEventListener('change', () => {
+  residencePreviewElement.innerHTML = '';
   const imgElement = document.createElement('img');
-  imgElement.style.width = '70px';
-  imgElement.style.height = '70px';
+  imgElement.style.width = DEFAULT_PREVIEW_SIZE;
+  imgElement.style.height = DEFAULT_PREVIEW_SIZE;
 
-  const file = residenceFileChooser.files[0];
+  const file = residenceFileChooserElement.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
@@ -35,12 +36,12 @@ residenceFileChooser.addEventListener('change', () => {
     imgElement.src = URL.createObjectURL(file);
   }
 
-  residencePreview.appendChild(imgElement);
+  residencePreviewElement.appendChild(imgElement);
 });
 
 const resetUpload = () => {
-  avatarPreview.src = defaultAvatarPreview;
-  residencePreview.innerHTML = '';
+  avatarPreviewElement.src = defaultAvatarPreview;
+  residencePreviewElement.innerHTML = '';
 };
 
 export {resetUpload};
